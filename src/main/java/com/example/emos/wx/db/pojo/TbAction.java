@@ -1,4 +1,4 @@
-package generator.pojo;
+package com.example.emos.wx.db.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -8,12 +8,12 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- * 模块资源表
- * @TableName tb_module
+ * 行为表
+ * @TableName tb_action
  */
-@TableName(value ="tb_module")
+@TableName(value ="tb_action")
 @Data
-public class TbModule implements Serializable {
+public class TbAction implements Serializable {
     /**
      * 主键
      */
@@ -21,14 +21,14 @@ public class TbModule implements Serializable {
     private Integer id;
 
     /**
-     * 模块编号
+     * 行为编号
      */
-    private String moduleCode;
+    private String actionCode;
 
     /**
-     * 模块名称
+     * 行为名称
      */
-    private String moduleName;
+    private String actionName;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -44,10 +44,10 @@ public class TbModule implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        TbModule other = (TbModule) that;
+        TbAction other = (TbAction) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getModuleCode() == null ? other.getModuleCode() == null : this.getModuleCode().equals(other.getModuleCode()))
-            && (this.getModuleName() == null ? other.getModuleName() == null : this.getModuleName().equals(other.getModuleName()));
+            && (this.getActionCode() == null ? other.getActionCode() == null : this.getActionCode().equals(other.getActionCode()))
+            && (this.getActionName() == null ? other.getActionName() == null : this.getActionName().equals(other.getActionName()));
     }
 
     @Override
@@ -55,8 +55,8 @@ public class TbModule implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getModuleCode() == null) ? 0 : getModuleCode().hashCode());
-        result = prime * result + ((getModuleName() == null) ? 0 : getModuleName().hashCode());
+        result = prime * result + ((getActionCode() == null) ? 0 : getActionCode().hashCode());
+        result = prime * result + ((getActionName() == null) ? 0 : getActionName().hashCode());
         return result;
     }
 
@@ -67,8 +67,8 @@ public class TbModule implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", moduleCode=").append(moduleCode);
-        sb.append(", moduleName=").append(moduleName);
+        sb.append(", actionCode=").append(actionCode);
+        sb.append(", actionName=").append(actionName);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

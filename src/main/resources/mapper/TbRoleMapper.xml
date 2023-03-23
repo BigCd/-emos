@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.emos.wx.db.daoper.TbRoleMapper">
+<mapper namespace="com.example.emos.wx.db.dao.TbRoleMapper">
 
-    <resultMap id="BaseResultMap" type="generator.pojo.TbRole">
+    <resultMap id="BaseResultMap" type="com.example.emos.wx.db.pojo.TbRole">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
             <result property="permissions" column="permissions" jdbcType="OTHER"/>

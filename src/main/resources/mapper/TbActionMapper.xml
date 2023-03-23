@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.emos.wx.db.daoper.TbActionMapper">
+<mapper namespace="com.example.emos.wx.db.dao.TbActionMapper">
 
-    <resultMap id="BaseResultMap" type="generator.pojo.TbAction">
+    <resultMap id="BaseResultMap" type="com.example.emos.wx.db.pojo.TbAction">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="actionCode" column="action_code" jdbcType="VARCHAR"/>
             <result property="actionName" column="action_name" jdbcType="VARCHAR"/>

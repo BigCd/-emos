@@ -1,6 +1,6 @@
 package com.example.emos.wx.service;
 
-import generator.pojo.TbCheckin;
+import com.example.emos.wx.db.pojo.TbCheckin;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

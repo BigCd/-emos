@@ -1,4 +1,4 @@
-package generator.pojo;
+package com.example.emos.wx.db.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

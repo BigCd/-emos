@@ -1,19 +1,20 @@
-package generator.pojo;
+package com.example.emos.wx.db.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.util.Date;
 import lombok.Data;
 
 /**
- * 角色表
- * @TableName tb_role
+ * 节假日表
+ * @TableName tb_holidays
  */
-@TableName(value ="tb_role")
+@TableName(value ="tb_holidays")
 @Data
-public class TbRole implements Serializable {
+public class TbHolidays implements Serializable {
     /**
      * 主键
      */
@@ -21,14 +22,9 @@ public class TbRole implements Serializable {
     private Integer id;
 
     /**
-     * 角色名称
+     * 日期
      */
-    private String roleName;
-
-    /**
-     * 权限集合
-     */
-    private Object permissions;
+    private Date date;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -44,10 +40,9 @@ public class TbRole implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        TbRole other = (TbRole) that;
+        TbHolidays other = (TbHolidays) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getRoleName() == null ? other.getRoleName() == null : this.getRoleName().equals(other.getRoleName()))
-            && (this.getPermissions() == null ? other.getPermissions() == null : this.getPermissions().equals(other.getPermissions()));
+            && (this.getDate() == null ? other.getDate() == null : this.getDate().equals(other.getDate()));
     }
 
     @Override
@@ -55,8 +50,7 @@ public class TbRole implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getRoleName() == null) ? 0 : getRoleName().hashCode());
-        result = prime * result + ((getPermissions() == null) ? 0 : getPermissions().hashCode());
+        result = prime * result + ((getDate() == null) ? 0 : getDate().hashCode());
         return result;
     }
 
@@ -67,8 +61,7 @@ public class TbRole implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", roleName=").append(roleName);
-        sb.append(", permissions=").append(permissions);
+        sb.append(", date=").append(date);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -1,19 +1,20 @@
-package generator.pojo;
+package com.example.emos.wx.db.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.util.Date;
 import lombok.Data;
 
 /**
  * 
- * @TableName tb_permission
+ * @TableName tb_workday
  */
-@TableName(value ="tb_permission")
+@TableName(value ="tb_workday")
 @Data
-public class TbPermission implements Serializable {
+public class TbWorkday implements Serializable {
     /**
      * 主键
      */
@@ -21,19 +22,9 @@ public class TbPermission implements Serializable {
     private Integer id;
 
     /**
-     * 权限
+     * 日期
      */
-    private String permissionName;
-
-    /**
-     * 模块ID
-     */
-    private Integer moduleId;
-
-    /**
-     * 行为ID
-     */
-    private Integer actionId;
+    private Date date;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -49,11 +40,9 @@ public class TbPermission implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        TbPermission other = (TbPermission) that;
+        TbWorkday other = (TbWorkday) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getPermissionName() == null ? other.getPermissionName() == null : this.getPermissionName().equals(other.getPermissionName()))
-            && (this.getModuleId() == null ? other.getModuleId() == null : this.getModuleId().equals(other.getModuleId()))
-            && (this.getActionId() == null ? other.getActionId() == null : this.getActionId().equals(other.getActionId()));
+            && (this.getDate() == null ? other.getDate() == null : this.getDate().equals(other.getDate()));
     }
 
     @Override
@@ -61,9 +50,7 @@ public class TbPermission implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getPermissionName() == null) ? 0 : getPermissionName().hashCode());
-        result = prime * result + ((getModuleId() == null) ? 0 : getModuleId().hashCode());
-        result = prime * result + ((getActionId() == null) ? 0 : getActionId().hashCode());
+        result = prime * result + ((getDate() == null) ? 0 : getDate().hashCode());
         return result;
     }
 
@@ -74,9 +61,7 @@ public class TbPermission implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", permissionName=").append(permissionName);
-        sb.append(", moduleId=").append(moduleId);
-        sb.append(", actionId=").append(actionId);
+        sb.append(", date=").append(date);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

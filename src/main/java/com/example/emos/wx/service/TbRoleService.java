@@ -1,6 +1,6 @@
 package com.example.emos.wx.service;
 
-import generator.pojo.TbRole;
+import com.example.emos.wx.db.pojo.TbRole;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

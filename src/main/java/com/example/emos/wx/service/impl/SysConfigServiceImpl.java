@@ -1,9 +1,9 @@
 package com.example.emos.wx.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import generator.pojo.SysConfig;
+import com.example.emos.wx.db.pojo.SysConfig;
 import com.example.emos.wx.service.SysConfigService;
-import com.example.emos.wx.db.daoper.SysConfigMapper;
+import com.example.emos.wx.db.dao.SysConfigMapper;
 import org.springframework.stereotype.Service;
 
 /**

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.emos.wx.db.daoper.TbMeetingMapper">
+<mapper namespace="com.example.emos.wx.db.dao.TbMeetingMapper">
 
-    <resultMap id="BaseResultMap" type="generator.pojo.TbMeeting">
+    <resultMap id="BaseResultMap" type="com.example.emos.wx.db.pojo.TbMeeting">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="uuid" column="uuid" jdbcType="VARCHAR"/>
             <result property="title" column="title" jdbcType="VARCHAR"/>

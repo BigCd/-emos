@@ -1,9 +1,9 @@
 package com.example.emos.wx.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import generator.pojo.TbHolidays;
+import com.example.emos.wx.db.pojo.TbHolidays;
 import com.example.emos.wx.service.TbHolidaysService;
-import com.example.emos.wx.db.daoper.TbHolidaysMapper;
+import com.example.emos.wx.db.dao.TbHolidaysMapper;
 import org.springframework.stereotype.Service;
 
 /**

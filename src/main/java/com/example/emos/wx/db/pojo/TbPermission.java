@@ -1,4 +1,4 @@
-package generator.pojo;
+package com.example.emos.wx.db.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -9,11 +9,11 @@ import lombok.Data;
 
 /**
  * 
- * @TableName tb_dept
+ * @TableName tb_permission
  */
-@TableName(value ="tb_dept")
+@TableName(value ="tb_permission")
 @Data
-public class TbDept implements Serializable {
+public class TbPermission implements Serializable {
     /**
      * 主键
      */
@@ -21,9 +21,19 @@ public class TbDept implements Serializable {
     private Integer id;
 
     /**
-     * 部门名称
+     * 权限
      */
-    private String deptName;
+    private String permissionName;
+
+    /**
+     * 模块ID
+     */
+    private Integer moduleId;
+
+    /**
+     * 行为ID
+     */
+    private Integer actionId;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -39,9 +49,11 @@ public class TbDept implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        TbDept other = (TbDept) that;
+        TbPermission other = (TbPermission) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getDeptName() == null ? other.getDeptName() == null : this.getDeptName().equals(other.getDeptName()));
+            && (this.getPermissionName() == null ? other.getPermissionName() == null : this.getPermissionName().equals(other.getPermissionName()))
+            && (this.getModuleId() == null ? other.getModuleId() == null : this.getModuleId().equals(other.getModuleId()))
+            && (this.getActionId() == null ? other.getActionId() == null : this.getActionId().equals(other.getActionId()));
     }
 
     @Override
@@ -49,7 +61,9 @@ public class TbDept implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getDeptName() == null) ? 0 : getDeptName().hashCode());
+        result = prime * result + ((getPermissionName() == null) ? 0 : getPermissionName().hashCode());
+        result = prime * result + ((getModuleId() == null) ? 0 : getModuleId().hashCode());
+        result = prime * result + ((getActionId() == null) ? 0 : getActionId().hashCode());
         return result;
     }
 
@@ -60,7 +74,9 @@ public class TbDept implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", deptName=").append(deptName);
+        sb.append(", permissionName=").append(permissionName);
+        sb.append(", moduleId=").append(moduleId);
+        sb.append(", actionId=").append(actionId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

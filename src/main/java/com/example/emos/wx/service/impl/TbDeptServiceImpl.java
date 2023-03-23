@@ -1,9 +1,9 @@
 package com.example.emos.wx.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import generator.pojo.TbDept;
+import com.example.emos.wx.db.pojo.TbDept;
 import com.example.emos.wx.service.TbDeptService;
-import com.example.emos.wx.db.daoper.TbDeptMapper;
+import com.example.emos.wx.db.dao.TbDeptMapper;
 import org.springframework.stereotype.Service;
 
 /**

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.emos.wx.db.daoper.SysConfigMapper">
+<mapper namespace="com.example.emos.wx.db.dao.SysConfigMapper">
 
-    <resultMap id="BaseResultMap" type="generator.pojo.SysConfig">
+    <resultMap id="BaseResultMap" type="com.example.emos.wx.db.pojo.SysConfig">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="paramKey" column="param_key" jdbcType="VARCHAR"/>
             <result property="paramValue" column="param_value" jdbcType="VARCHAR"/>

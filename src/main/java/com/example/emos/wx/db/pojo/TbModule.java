@@ -1,20 +1,19 @@
-package generator.pojo;
+package com.example.emos.wx.db.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 
 /**
- * 
- * @TableName tb_workday
+ * 模块资源表
+ * @TableName tb_module
  */
-@TableName(value ="tb_workday")
+@TableName(value ="tb_module")
 @Data
-public class TbWorkday implements Serializable {
+public class TbModule implements Serializable {
     /**
      * 主键
      */
@@ -22,9 +21,14 @@ public class TbWorkday implements Serializable {
     private Integer id;
 
     /**
-     * 日期
+     * 模块编号
      */
-    private Date date;
+    private String moduleCode;
+
+    /**
+     * 模块名称
+     */
+    private String moduleName;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -40,9 +44,10 @@ public class TbWorkday implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        TbWorkday other = (TbWorkday) that;
+        TbModule other = (TbModule) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getDate() == null ? other.getDate() == null : this.getDate().equals(other.getDate()));
+            && (this.getModuleCode() == null ? other.getModuleCode() == null : this.getModuleCode().equals(other.getModuleCode()))
+            && (this.getModuleName() == null ? other.getModuleName() == null : this.getModuleName().equals(other.getModuleName()));
     }
 
     @Override
@@ -50,7 +55,8 @@ public class TbWorkday implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getDate() == null) ? 0 : getDate().hashCode());
+        result = prime * result + ((getModuleCode() == null) ? 0 : getModuleCode().hashCode());
+        result = prime * result + ((getModuleName() == null) ? 0 : getModuleName().hashCode());
         return result;
     }
 
@@ -61,7 +67,8 @@ public class TbWorkday implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", date=").append(date);
+        sb.append(", moduleCode=").append(moduleCode);
+        sb.append(", moduleName=").append(moduleName);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

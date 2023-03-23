@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.emos.wx.db.daoper.TbHolidaysMapper">
+<mapper namespace="com.example.emos.wx.db.dao.TbHolidaysMapper">
 
-    <resultMap id="BaseResultMap" type="generator.pojo.TbHolidays">
+    <resultMap id="BaseResultMap" type="com.example.emos.wx.db.pojo.TbHolidays">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="date" column="date" jdbcType="DATE"/>
     </resultMap>
