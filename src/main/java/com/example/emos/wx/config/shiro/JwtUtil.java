@@ -28,7 +28,7 @@ public class JwtUtil {
     @Value("${emos.jwt.expire}")
     private int expire;
 
-    public String CreateToken(int userId){
+    public String createToken(int userId){
         Date date = DateUtil.offset(new Date(), DateField.DAY_OF_YEAR,expire).toJdkDate();
         Algorithm algorithm = Algorithm.HMAC256(secret);
         JWTCreator.Builder builder = JWT.create();
@@ -50,5 +50,6 @@ public class JwtUtil {
         JWTVerifier verifier = JWT.require(algorithm).build();
         verifier.verify(token);
     }
+
 
 }
