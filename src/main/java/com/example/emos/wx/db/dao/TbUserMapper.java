@@ -16,6 +16,8 @@ public interface TbUserMapper extends BaseMapper<TbUser> {
     public int insert(HashMap param);
 
     public Integer searchIdByOpenId(String openId);
+
+
 }
 
 
