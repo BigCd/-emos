@@ -3,6 +3,8 @@ package com.example.emos.wx.db.dao;
 import com.example.emos.wx.db.pojo.TbUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.HashMap;
+
 /**
 * @author Administrator
 * @description 针对表【tb_user(用户表)】的数据库操作Mapper
@@ -10,7 +12,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.example.emos.wx.db.dao.pojo.TbUser
 */
 public interface TbUserMapper extends BaseMapper<TbUser> {
+    public boolean haveRootUser();
+    public int insert(HashMap param);
 
+    public Integer searchIdByOpenId(String openId);
 }
 
 
