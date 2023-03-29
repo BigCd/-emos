@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
 * @author Administrator
@@ -96,6 +97,12 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
         else{
             return 0;
         }
+    }
+
+    @Override
+    public Set<String> searchUserPermissions(int userId) {
+        Set<String> permissions=tbUserMapper.searchUserPermissions(userId);
+        return permissions;
     }
 }
 

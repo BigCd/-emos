@@ -4,6 +4,7 @@ import com.example.emos.wx.db.pojo.TbUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.HashMap;
+import java.util.Set;
 
 /**
 * @author Administrator
@@ -17,6 +18,7 @@ public interface TbUserMapper extends BaseMapper<TbUser> {
 
     public Integer searchIdByOpenId(String openId);
 
+    public Set<String> searchUserPermissions(int userId);
 
 }
 
