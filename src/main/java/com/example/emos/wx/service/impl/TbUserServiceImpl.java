@@ -104,6 +104,27 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
         Set<String> permissions=tbUserMapper.searchUserPermissions(userId);
         return permissions;
     }
+
+    /**
+     *  用户在Emos登陆页面点击登陆按钮，
+     *  然后小程序把临时授权字符串提交给后端Java系统。
+     *  后端Java系统拿着临时授权字符串换取到openid，
+     *  我们查询用户表中是否存在这个openid。
+     *  如果存在，意味着该用户是已注册用户，可以登录。
+     *  如果不存在，说明该用户尚未注册，目前还不是我们的员工，所以禁止登录。
+     * @param code
+     * @return
+     */
+    @Override
+    public Integer login(String code) {
+        String openId = getOpenId(code);
+        Integer id = tbUserMapper.searchIdByOpenId(openId);
+        if(id==null){
+            throw new EmosException("账户不存在");
+        }
+        //TODO从消息队列中接受消息，转移到消息表
+        return id;
+    }
 }
 
 

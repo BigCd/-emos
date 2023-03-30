@@ -20,6 +20,9 @@ public interface TbUserMapper extends BaseMapper<TbUser> {
 
     public Set<String> searchUserPermissions(int userId);
 
+
+
+
 }
 
 

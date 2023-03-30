@@ -15,6 +15,9 @@ public interface TbUserService extends IService<TbUser> {
 
     public Set<String> searchUserPermissions(int userId);
 
+    public Integer login(String code);
+
+
 
 
 }
