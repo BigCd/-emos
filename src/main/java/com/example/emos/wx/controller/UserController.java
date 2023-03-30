@@ -50,6 +50,8 @@ public class UserController {
      * @param
      * @param userId
      */
+    @RequestMapping("login")
+    @ApiOperation("用户登录")
     private void saveCacheToken(String token, int userId) {
         redisTemplate.opsForValue().set(token, userId + "", cacheExpire, TimeUnit.DAYS);
     }
