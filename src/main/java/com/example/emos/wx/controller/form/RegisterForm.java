@@ -1,5 +1,6 @@
 package com.example.emos.wx.controller.form;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 

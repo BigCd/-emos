@@ -30,7 +30,7 @@
     </sql>
 
     <select id="haveRootUser" resultType="boolean">
-        SELECT IF(COUNT(*),TURE,FALSE) FROM tb_user WHERE root=1;
+        SELECT IF(COUNT(*),TRUE,FALSE) FROM tb_user WHERE root=1;
     </select>
 
     <insert id="insert" parameterType="HashMap">

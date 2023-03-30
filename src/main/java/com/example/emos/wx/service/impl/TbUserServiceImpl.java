@@ -33,7 +33,7 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
     @Value("${wx.app-id}")
     private String appId;
 
-    @Value("${wx-app-secret}")
+    @Value("${wx.app-secret}")
     private String appSecret;
 
     @Resource
