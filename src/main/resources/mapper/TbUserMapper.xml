@@ -81,9 +81,7 @@
         WHERE u.id = #{userId} AND u.status = 1;
     </select>
 
-    <select id="searchIdByOpenId" parameterType="String" resultType="Integer">
-        SELECT id FROM tb_user WHERE open_id=#{openId} AND status = 1
-    </select>
+
 
 
 
