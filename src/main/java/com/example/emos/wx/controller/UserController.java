@@ -50,8 +50,6 @@ public class UserController {
      * @param
      * @param userId
      */
-    @RequestMapping("login")
-    @ApiOperation("用户登录")
     private void saveCacheToken(String token, int userId) {
         redisTemplate.opsForValue().set(token, userId + "", cacheExpire, TimeUnit.DAYS);
     }
@@ -61,6 +59,8 @@ public class UserController {
      * @param form
      * @return
      */
+    @RequestMapping("login")
+    @ApiOperation("用户登录")
     public R login(@Valid @RequestBody LoginForm form){
         //通过临时授权码拿到id
         int id=tbUserService.login(form.getCode());

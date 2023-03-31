@@ -16,4 +16,9 @@
         id,param_key,param_value,
         status,remark
     </sql>
+
+    <select id="selectAllParam" resultType="com.example.emos.wx.db.pojo.SysConfig">
+        SELECT param_key, param_value FROM sys_config WHERE status = 1;
+    </select>
+
 </mapper>

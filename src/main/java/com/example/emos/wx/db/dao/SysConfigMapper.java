@@ -4,6 +4,8 @@ import com.example.emos.wx.db.pojo.SysConfig;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
 * @author Administrator
 * @description 针对表【sys_config】的数据库操作Mapper
@@ -11,6 +13,10 @@ import org.apache.ibatis.annotations.Mapper;
 * @Entity com.example.emos.wx.db.dao.pojo.SysConfig
 */
 public interface SysConfigMapper extends BaseMapper<SysConfig> {
+
+
+     public List<SysConfig> selectAllParam();
+
 
 }
 
