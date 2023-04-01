@@ -1,9 +1,9 @@
 package com.example.emos.wx.config.shiro;
 
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import com.example.emos.wx.db.pojo.TbUser;
+import com.example.emos.wx.service.TbCheckinService;
+import com.example.emos.wx.service.TbUserService;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -16,6 +16,8 @@ public class OAuth2Realm extends AuthorizingRealm {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    private TbUserService tbUserService;
 
     public boolean supports(AuthenticationToken token){
         return token instanceof OAuth2Token;
@@ -36,15 +38,21 @@ public class OAuth2Realm extends AuthorizingRealm {
 
     /**
      * 认证（登录时调用）
-     * @param authenticationToken
+     * @param token
      * @return
      * @throws AuthenticationException
      */
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         //TODO 从令牌中获取userId，然后检测该账户是否被冻结。
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo();
+        String accessToken = (String)token.getPrincipal();
+        int userId = jwtUtil.getUserId(accessToken);
+        TbUser user = tbUserService.searchById(userId);
+        if(user==null){
+            throw new LockedAccountException("账号已被锁定，请联系管理员");
+        }
         //TODO 往info对象中添加用户信息、Token字符串
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo();
         return info;
     }
 }

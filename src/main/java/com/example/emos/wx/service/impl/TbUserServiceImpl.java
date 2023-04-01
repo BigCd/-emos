@@ -125,6 +125,18 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
         //TODO从消息队列中接受消息，转移到消息表
         return id;
     }
+
+    /**
+     * 查询用户信息，然后判断用现在是在职还是离职状态。
+     * 如果是在职状态，那就可以创建认证对象，反之就抛出异常
+     * @param userId
+     * @return
+     */
+    @Override
+    public TbUser searchById(int userId) {
+        TbUser user = tbUserMapper.searchById(userId);
+        return user;
+    }
 }
 
 

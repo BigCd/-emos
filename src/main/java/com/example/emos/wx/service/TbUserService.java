@@ -17,6 +17,7 @@ public interface TbUserService extends IService<TbUser> {
 
     public Integer login(String code);
 
+    public TbUser searchById(int userId);
 
 
 
