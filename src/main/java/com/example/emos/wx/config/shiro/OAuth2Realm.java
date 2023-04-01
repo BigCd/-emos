@@ -11,6 +11,8 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+
 @Component
 public class OAuth2Realm extends AuthorizingRealm {
 
@@ -30,9 +32,14 @@ public class OAuth2Realm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+
         //TODO查询用户的权限列表
+        TbUser tbUser = (TbUser) principalCollection.getPrimaryPrincipal();
+        int userId = tbUser.getId();
+        Set<String> permsSet = tbUserService.searchUserPermissions(userId);
         //TODO把权限列表添加到info对象中
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        info.setStringPermissions(permsSet);
         return info;
     }
 

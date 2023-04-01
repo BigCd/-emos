@@ -7,6 +7,8 @@ import com.example.emos.wx.controller.form.RegisterForm;
 import com.example.emos.wx.service.TbUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -72,5 +74,13 @@ public class UserController {
         saveCacheToken(token,id);
         return R.ok("登录成功").put("token",token).put("permission",permsSet);
     }
+
+    @PostMapping("/addUser")
+    @ApiOperation("添加用户")
+    @RequiresPermissions(value = {"ROOT", "USER:ADD"}, logical = Logical.OR)
+    public R addUser() {
+        return R.ok("用户添加成功");
+    }
+
 
 }
