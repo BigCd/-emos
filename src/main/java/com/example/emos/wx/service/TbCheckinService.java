@@ -9,5 +9,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2023-03-23 19:00:58
 */
 public interface TbCheckinService extends IService<TbCheckin> {
+    public String validCanCheckIn(int userId, String date);
 
 }
