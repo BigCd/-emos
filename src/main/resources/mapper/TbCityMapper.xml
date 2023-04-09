@@ -13,4 +13,11 @@
     <sql id="Base_Column_List">
         id,city,code
     </sql>
+
+    <select id="searchCode" parameterType="String" resultType="String">
+        SELECT code
+        FROM tb_city
+        WHERE city = #{city}
+    </select>
+
 </mapper>

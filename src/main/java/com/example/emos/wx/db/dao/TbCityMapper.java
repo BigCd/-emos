@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.example.emos.wx.db.dao.pojo.TbCity
 */
 public interface TbCityMapper extends BaseMapper<TbCity> {
-
+    public String searchCode(String city);
 }
 
 
