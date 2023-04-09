@@ -13,4 +13,21 @@
     <sql id="Base_Column_List">
         id,user_id,face_model
     </sql>
+
+    <select id="searchFaceModel" parameterType="int" resultType="String">
+        SELECT face_model FROM tb_face_model
+        WHERE user_id = #{userId}
+    </select>
+
+    <insert id="insertFaceModel" parameterType="com.example.emos.wx.db.pojo.TbFaceModel">
+        INSERT INTO tb_face_model
+        SET user_id = #{userId},
+            face_model = #{faceModel}
+    </insert>
+
+    <delete id="deleteFaceModel" parameterType="int">
+        DELETE FROM tb_face_model
+        WHERE user_id=#{userId}
+    </delete>
+
 </mapper>

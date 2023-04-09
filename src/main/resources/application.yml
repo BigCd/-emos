@@ -68,9 +68,13 @@ emos:
     expire:  5
     #令牌缓存时间（天数）
     cache-expire: 10
+  face:
+    createFaceModelUrl: http://192.168.100.90:3000/create_face_model
+    checkinUrl: http://192.168.100.90:3000/checkin
 wx:
   app-id: wx83f8fbbf27659300
   app-secret: 42b9773df65c58e5278d3be27a9be289
+
 
 
 

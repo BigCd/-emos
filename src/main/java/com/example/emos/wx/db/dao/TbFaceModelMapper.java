@@ -10,6 +10,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.example.emos.wx.db.dao.pojo.TbFaceModel
 */
 public interface TbFaceModelMapper extends BaseMapper<TbFaceModel> {
+    public String searchFaceModel(int userId);
+    public void insertFaceModel(TbFaceModel faceModelEntity);
+    public int deleteFaceModel(int userId);
 
 }
 

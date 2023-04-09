@@ -13,6 +13,10 @@ import java.util.HashMap;
 */
 public interface TbCheckinMapper extends BaseMapper<TbCheckin> {
     public Integer haveCheckin(HashMap param);
+
+    public void insertFaceModelCheck(TbCheckin entity);
+
+
 }
 
 
