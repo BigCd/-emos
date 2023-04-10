@@ -19,5 +19,5 @@ public interface TbCheckinService extends IService<TbCheckin> {
 
     public void checkin(CheckinForm form ,int userId,String path);
 
-
+    public void createFaceModel(int userId, String path);
 }

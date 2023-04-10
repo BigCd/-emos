@@ -12,6 +12,7 @@ import com.example.emos.wx.config.SystemConstants;
 import com.example.emos.wx.controller.form.CheckinForm;
 import com.example.emos.wx.db.dao.*;
 import com.example.emos.wx.db.pojo.TbCheckin;
+import com.example.emos.wx.db.pojo.TbFaceModel;
 import com.example.emos.wx.db.pojo.TbHolidays;
 import com.example.emos.wx.exception.EmosException;
 import com.example.emos.wx.service.TbCheckinService;
@@ -56,6 +57,9 @@ public class TbCheckinServiceImpl extends ServiceImpl<TbCheckinMapper, TbCheckin
     @Resource
     private TbFaceModelMapper faceModelDao;
 
+    @Value("${emos.face.createFaceModelUrl}")
+    private String createFaceModelUrl;
+
     @Value("${emos.face.checkinUrl}")
     private String checkinUrl;
 
@@ -69,6 +73,10 @@ public class TbCheckinServiceImpl extends ServiceImpl<TbCheckinMapper, TbCheckin
     private EmailTask emailTask;
 
     private TbUserMapper tbUserMapper;
+
+
+
+
 
     @Override
     public String validCanCheckIn(int userId, String date) {
@@ -306,6 +314,8 @@ public class TbCheckinServiceImpl extends ServiceImpl<TbCheckinMapper, TbCheckin
         }
     }
 
+
+
     public void checkinFist(HashMap param) {
         //判断签到
         Date d1 = DateUtil.date();//当前时间
@@ -342,6 +352,33 @@ public class TbCheckinServiceImpl extends ServiceImpl<TbCheckinMapper, TbCheckin
                 //TODO 这里要获取签到地区新冠疫情风险等级
                 //TODO 保存签到记录
             }
+        }
+    }
+
+    /**
+     * 用户是第一次签到，
+     * checkin方法检测到数据库中没有该员工的人脸模型数据，
+     * 移动端会收到异常消息，
+     * 所以要重新发送HTTP请求，
+     * 让后端项目用签到照片创建人脸模型数据。
+     * @param userId
+     * @param path
+     */
+    @Override
+    public void createFaceModel(int userId, String path) {
+        //向人脸识别程序发送http请求，文件post请求
+        HttpRequest request = HttpUtil.createPost(createFaceModelUrl);
+        //放置要上传的照片，”photo“跟人脸识别程序约定俗成
+        request.form("photo",FileUtil.file(path));
+        HttpResponse response = request.execute();
+        String body = response.body();
+        if ("无法识别出人脸".equals(body) || "照片中存在多张人脸".equals(body)) {
+            throw new EmosException(body);
+        } else {
+            TbFaceModel entity = new TbFaceModel();
+            entity.setUserId(userId);
+            entity.setFaceModel(body);
+            faceModelDao.insert(entity);
         }
     }
 }
