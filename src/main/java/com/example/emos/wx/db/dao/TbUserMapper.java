@@ -22,6 +22,9 @@ public interface TbUserMapper extends BaseMapper<TbUser> {
 
     public TbUser searchById(int userId);
 
+    public HashMap searchNameAndDept(int userId);
+
+
 
 
 }

@@ -14,10 +14,14 @@ import com.example.emos.wx.db.pojo.TbCheckin;
 import com.example.emos.wx.db.pojo.TbHolidays;
 import com.example.emos.wx.exception.EmosException;
 import com.example.emos.wx.service.TbCheckinService;
+import com.example.emos.wx.task.EmailTask;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
@@ -35,6 +39,8 @@ import java.util.HashMap;
 * @createDate 2023-03-23 19:00:58
 */
 @Service
+@Scope("prototype")
+@Slf4j
 public class TbCheckinServiceImpl extends ServiceImpl<TbCheckinMapper, TbCheckin>
     implements TbCheckinService{
     @Autowired
@@ -52,7 +58,16 @@ public class TbCheckinServiceImpl extends ServiceImpl<TbCheckinMapper, TbCheckin
     @Value("${emos.face.checkinUrl}")
     private String checkinUrl;
 
+    @Autowired
     private TbCityMapper tbCityMapper;
+
+    @Value("${emos.email.hr}")
+    private String hrEmail;
+
+    @Autowired
+    private EmailTask emailTask;
+
+    private TbUserMapper tbUserMapper;
 
     @Override
     public String validCanCheckIn(int userId, String date) {
@@ -146,6 +161,15 @@ public class TbCheckinServiceImpl extends ServiceImpl<TbCheckinMapper, TbCheckin
                             if ("高风险".equals(result)) {
                                 risk = 3;
                                 //发送告警邮件
+                                HashMap<String,String> map = tbUserMapper.searchNameAndDept(userId);
+                                String name = map.get("name");
+                                String deptName = map.get("dept_name");
+                                deptName = deptName != null?deptName:"";
+                                SimpleMailMessage message = new SimpleMailMessage();
+                                message.setTo(hrEmail);
+                                message.setSubject("员工" + name + "身处高风险疫情地区警告");
+                                message.setText(deptName + "员工" + name + "，" + DateUtil.format(new Date(), "yyyy年MM月dd日") + "处于" + address + "，属于新冠疫情高风险地区，请及时与该员工联系，核实情况！");
+                                emailTask.sendAsync(message);
                             } else if ("中风险".equals(result)) {
                                 risk = risk < 2 ? 2 : risk;
                             }

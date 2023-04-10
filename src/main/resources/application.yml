@@ -48,6 +48,21 @@ spring:
               authentication-database: admin
               username: admin
               password: abc123456
+  # 邮箱连接参数
+  mail:
+    default-encoding: UTF-8
+    host: smtp.qq.com
+    port: 587
+    username: 1293360341@qq.com
+    password: atneybdhcxwbfhhe
+    # 其它参数配置（我是按照教材上配置的，这个 properties 是一个 map）
+    properties:
+      mail:
+        smtp:
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
   type-aliases-package: com.example.emos.wx.db.pojo
@@ -71,6 +86,10 @@ emos:
   face:
     createFaceModelUrl: http://192.168.100.90:3000/create_face_model
     checkinUrl: http://192.168.100.90:3000/checkin
+  email:
+    system: heyun.yair@foxmail.com
+    hr: 1293360341@qq.com
+
 wx:
   app-id: wx83f8fbbf27659300
   app-secret: 42b9773df65c58e5278d3be27a9be289
