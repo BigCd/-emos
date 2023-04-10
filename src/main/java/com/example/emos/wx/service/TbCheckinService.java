@@ -14,7 +14,7 @@ import java.util.HashMap;
 public interface TbCheckinService extends IService<TbCheckin> {
     public String validCanCheckIn(int userId, String date);
 
-    //public void checkin(HashMap param);
+    public void checkin(HashMap param);
 
 
     public void checkin(CheckinForm form ,int userId,String path);

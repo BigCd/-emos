@@ -89,6 +89,7 @@ emos:
   email:
     system: heyun.yair@foxmail.com
     hr: 1293360341@qq.com
+  image-folder: C:/hy/emos/image
 
 wx:
   app-id: wx83f8fbbf27659300
