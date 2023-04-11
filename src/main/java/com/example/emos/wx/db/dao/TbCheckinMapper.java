@@ -3,6 +3,7 @@ package com.example.emos.wx.db.dao;
 import com.example.emos.wx.db.pojo.TbCheckin;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -16,7 +17,9 @@ public interface TbCheckinMapper extends BaseMapper<TbCheckin> {
 
     public void insertFaceModelCheck(TbCheckin entity);
 
-
+    public HashMap searchTodayCheckin(int userId);
+    public long searchCheckinDays(int userId);
+    public ArrayList<HashMap> searchWeekCheckin(HashMap param);
 }
 
 
