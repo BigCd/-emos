@@ -4,6 +4,7 @@ import com.example.emos.wx.controller.form.CheckinForm;
 import com.example.emos.wx.db.pojo.TbCheckin;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -20,4 +21,10 @@ public interface TbCheckinService extends IService<TbCheckin> {
     public void checkin(CheckinForm form ,int userId,String path);
 
     public void createFaceModel(int userId, String path);
+
+    public HashMap searchTodayCheckin(int userId);
+
+    public long searchCheckinDays(int userId);
+
+    public ArrayList<HashMap> searchWeekCheckin(HashMap param);
 }
