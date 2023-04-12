@@ -137,6 +137,20 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
         TbUser user = tbUserMapper.searchById(userId);
         return user;
     }
+
+    /**
+     * 那天入职的
+     * @param userId
+     * @return
+     */
+    @Override
+    public String searchUserHiredate(int userId) {
+        String hiredate = tbUserMapper.searchUserHiredate(userId);
+        return hiredate;
+    }
+
+
+
 }
 
 
