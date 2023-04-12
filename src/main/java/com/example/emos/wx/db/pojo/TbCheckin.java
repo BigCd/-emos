@@ -54,7 +54,7 @@ public class TbCheckin implements Serializable {
     /**
      * 考勤结果
      */
-    private Integer status;
+    private Byte status;
 
     /**
      * 风险等级
@@ -64,7 +64,7 @@ public class TbCheckin implements Serializable {
     /**
      * 签到日期
      */
-    private Date date;
+    private String date;
 
     /**
      * 签到时间

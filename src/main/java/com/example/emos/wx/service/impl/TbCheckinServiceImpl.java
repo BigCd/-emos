@@ -207,16 +207,9 @@ public class TbCheckinServiceImpl extends ServiceImpl<TbCheckinMapper, TbCheckin
                 entity.setProvince(province);
                 entity.setCity(city);
                 entity.setDistrict(district);
-                entity.setStatus((Integer) status);
+                entity.setStatus((byte) status);
                 entity.setRisk(risk);
-                //String转Date
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                try {
-                    Date date = simpleDateFormat.parse(DateUtil.today());
-                    entity.setDate(date);
-                } catch (ParseException e) {
-                    throw new RuntimeException(e);
-                }
+                entity.setDate(DateUtil.today());
                 entity.setCreateTime(d1);
                 tbCheckinMapper.insert(entity);
             }
@@ -301,16 +294,9 @@ public class TbCheckinServiceImpl extends ServiceImpl<TbCheckinMapper, TbCheckin
                 entity.setProvince(province);
                 entity.setCity(city);
                 entity.setDistrict(district);
-                entity.setStatus((Integer) status);
+                entity.setStatus((byte) status);
                 entity.setRisk(risk);
-                //String转Date
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                try {
-                    Date date = simpleDateFormat.parse(DateUtil.today());
-                    entity.setDate(date);
-                } catch (ParseException e) {
-                    throw new RuntimeException(e);
-                }
+                entity.setDate(DateUtil.today());
                 entity.setCreateTime(d1);
                 tbCheckinMapper.insert(entity);
             }

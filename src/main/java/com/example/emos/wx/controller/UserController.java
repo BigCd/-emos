@@ -1,5 +1,6 @@
 package com.example.emos.wx.controller;
 
+import cn.hutool.core.util.StrUtil;
 import com.example.emos.wx.common.util.R;
 import com.example.emos.wx.config.shiro.JwtUtil;
 import com.example.emos.wx.controller.form.LoginForm;
@@ -12,10 +13,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Set;
@@ -63,16 +61,18 @@ public class UserController {
      */
     @RequestMapping("login")
     @ApiOperation("用户登录")
-    public R login(@Valid @RequestBody LoginForm form){
-        //通过临时授权码拿到id
-        int id=tbUserService.login(form.getCode());
-        //创建token
-        String token = jwtUtil.createToken(id);
-        //查询权限
+    public R login(@Valid @RequestBody LoginForm form, @RequestHeader("token") String token) {
+        Integer id;
+        if (StrUtil.isNotEmpty(token)) {
+            jwtUtil.verifierToken(token);   //验证令牌的有效性
+            id = jwtUtil.getUserId(token);
+        } else {
+            id = tbUserService.login(form.getCode());
+            token = jwtUtil.createToken(id);
+            saveCacheToken(token, id);
+        }
         Set<String> permsSet = tbUserService.searchUserPermissions(id);
-        //缓存token到redis
-        saveCacheToken(token,id);
-        return R.ok("登录成功").put("token",token).put("permission",permsSet);
+        return R.ok("登陆成功").put("token", token).put("permission", permsSet);
     }
 
     @PostMapping("/addUser")
