@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.io.File;
 import java.lang.reflect.Field;
@@ -38,6 +39,7 @@ public class EmosWxApiApplication {
         SpringApplication.run(EmosWxApiApplication.class, args);
     }
 
+    @PostConstruct
     public void init(){
         List<SysConfig> list = sysConfigMapper.selectAllParam();
         list.forEach(one->{

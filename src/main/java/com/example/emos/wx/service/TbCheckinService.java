@@ -27,4 +27,6 @@ public interface TbCheckinService extends IService<TbCheckin> {
     public long searchCheckinDays(int userId);
 
     public ArrayList<HashMap> searchWeekCheckin(HashMap param);
+
+    public ArrayList<HashMap> searchMonthCheckin(HashMap param);
 }

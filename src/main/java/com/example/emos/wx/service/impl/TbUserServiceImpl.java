@@ -149,6 +149,11 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
         return hiredate;
     }
 
+    @Override
+    public HashMap searchUserSummary(int userId) {
+        HashMap map = tbUserMapper .searchUserSummary(userId);
+        return map;
+    }
 
 
 }

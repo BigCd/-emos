@@ -19,6 +19,7 @@ public class OAuth2Realm extends AuthorizingRealm {
     @Autowired
     private JwtUtil jwtUtil;
 
+    @Autowired
     private TbUserService tbUserService;
 
     public boolean supports(AuthenticationToken token){
@@ -58,8 +59,8 @@ public class OAuth2Realm extends AuthorizingRealm {
         if(user==null){
             throw new LockedAccountException("账号已被锁定，请联系管理员");
         }
-        //TODO 往info对象中添加用户信息、Token字符串
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo();
+        // 往info对象中添加用户信息、Token字符串
+        SimpleAuthenticationInfo info=new SimpleAuthenticationInfo(user,accessToken,getName());
         return info;
     }
 }

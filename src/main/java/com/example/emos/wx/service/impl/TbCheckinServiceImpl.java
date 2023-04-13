@@ -127,6 +127,8 @@ public class TbCheckinServiceImpl extends ServiceImpl<TbCheckinMapper, TbCheckin
         Date d1=DateUtil.date();
         Date d2=DateUtil.parse(DateUtil.today()+" "+systemConstants.attendanceTime);
         Date d3=DateUtil.parse(DateUtil.today()+" "+systemConstants.attendanceEndTime);
+/*        Date d2=DateUtil.parse(DateUtil.today()+" "+"08:30");
+        Date d3=DateUtil.parse(DateUtil.today()+" "+"09:30");*/
         int status=1;
         if(d1.compareTo(d2)<=0){
             status=1;
@@ -447,6 +449,11 @@ public class TbCheckinServiceImpl extends ServiceImpl<TbCheckinMapper, TbCheckin
             list.add(map);
         });
         return list;
+    }
+
+    @Override
+    public ArrayList<HashMap> searchMonthCheckin(HashMap param) {
+        return this.searchWeekCheckin(param);
     }
 }
 

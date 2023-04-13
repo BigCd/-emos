@@ -16,6 +16,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -80,6 +81,14 @@ public class UserController {
     @RequiresPermissions(value = {"ROOT", "USER:ADD"}, logical = Logical.OR)
     public R addUser() {
         return R.ok("用户添加成功");
+    }
+
+    @GetMapping("/searchUserSummary")
+    @ApiOperation("查询用户摘要信息")
+    public R searchUserSummary(@RequestHeader("token") String token) {
+        int userId = jwtUtil.getUserId(token);
+        HashMap map = tbUserService.searchUserSummary(userId);
+        return R.ok().put("result", map);
     }
 
 
