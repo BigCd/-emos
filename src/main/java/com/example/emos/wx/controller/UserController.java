@@ -6,6 +6,7 @@ import com.example.emos.wx.config.shiro.JwtUtil;
 import com.example.emos.wx.controller.form.LoginForm;
 import com.example.emos.wx.controller.form.RegisterForm;
 import com.example.emos.wx.service.TbUserService;
+import com.example.emos.wx.task.MessageTask;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.Logical;
@@ -36,6 +37,8 @@ public class UserController {
 
     @Value("${emos.jwt.cache-expire}")
     private int cacheExpire;
+
+
 
     @PostMapping("/register")
     @ApiOperation("注册用户")
@@ -95,6 +98,8 @@ public class UserController {
         HashMap map = tbUserService.searchUserSummary(userId);
         return R.ok().put("result", map);
     }
+
+
 
 
 }
