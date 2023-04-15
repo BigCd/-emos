@@ -24,25 +24,23 @@ public class MessageTask {
     private MessageService messageService;
 
     /**
-     * 同学发送消息
+     * 同步发送消息
      * @param topic 主题
      * @param entity 消息对象
      */
-    public void send(String topic, MessageEntity entity){
-        String id = messageService.insertMessage(entity);//向MongoDB保存消息数据，返回消息ID
-        //向RabbitMQ发送消息
-        try(Connection connection = factory.newConnection();
-            Channel channel = connection.createChannel()){
-            //连接到某个Topic
-            channel.queueDeclare(topic,true,false,false,null);
-            HashMap header = new HashMap();//存放属性数据
-            header.put("messageId",id);
-            //创建AMQP协议参数对象，添加附加属性
-            AMQP.BasicProperties properties = new AMQP.BasicProperties().builder().headers(header).build();
-            channel.basicPublish("",topic,properties,entity.getMsg().getBytes());
+    public void send(String topic, MessageEntity entity) {
+        String id = messageService.insertMessage(entity);
+        try (Connection connection = factory.newConnection();
+             Channel channel = connection.createChannel();
+        ) {
+            channel.queueDeclare(topic, true, false, false, null);
+            HashMap map = new HashMap();
+            map.put("messageId", id);
+            AMQP.BasicProperties properties = new AMQP.BasicProperties().builder().headers(map).build();
+            channel.basicPublish("", topic, properties, entity.getMsg().getBytes());
             log.debug("消息发送成功");
-        }catch (Exception e){
-            log.error("执行异常",e);
+        } catch (Exception e) {
+            log.error("执行异常", e);
             throw new EmosException("向MQ发送消息失败");
         }
     }
@@ -53,8 +51,8 @@ public class MessageTask {
      * @param entity
      */
     @Async
-    public void sendAsync(String topic,MessageEntity entity){
-        send(topic,entity);
+    public void sendAsync(String topic, MessageEntity entity) {
+        send(topic, entity);
     }
 
 

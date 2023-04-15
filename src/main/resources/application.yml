@@ -42,12 +42,13 @@ spring:
           #这里省略Redis配置信息
           data:
             mongodb:
-              host: localhost
-              port: 27017
-              database: emos
-              authentication-database: admin
-              username: admin
-              password: abc123456
+              #host: localhost
+              #port: 27017
+              #database: emos
+              #authentication-database: admin
+              #username: admin
+              #password: abc123456
+              uri: mongodb://admin:abc123456@localhost:27017/emos
   # 邮箱连接参数
   mail:
     default-encoding: UTF-8

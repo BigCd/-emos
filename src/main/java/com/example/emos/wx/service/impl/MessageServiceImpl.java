@@ -22,7 +22,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public String insertMessage(MessageEntity entity) {
-        String id = messageDao.insert(entity);
+        String id=messageDao.insert(entity);
         return id;
     }
 

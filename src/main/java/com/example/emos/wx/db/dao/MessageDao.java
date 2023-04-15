@@ -23,11 +23,10 @@ public class MessageDao {
     private MongoTemplate mongoTemplate;
 
     public String insert(MessageEntity entity){
-        //把北京时间转换成格林尼治时间
-        Date sendTime = entity.getSendTime();
-        sendTime = DateUtil.offset(sendTime, DateField.HOUR,8);
+        Date sendTime=entity.getSendTime();
+        sendTime=DateUtil.offset(sendTime, DateField.HOUR,8);
         entity.setSendTime(sendTime);
-        entity = mongoTemplate.save(entity);
+        entity=mongoTemplate.save(entity);
         return entity.get_id();
     }
 

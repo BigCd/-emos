@@ -1,13 +1,16 @@
 package com.example.emos.wx.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.emos.wx.db.pojo.MessageEntity;
 import com.example.emos.wx.db.pojo.TbUser;
 import com.example.emos.wx.exception.EmosException;
 import com.example.emos.wx.service.TbUserService;
 import com.example.emos.wx.db.dao.TbUserMapper;
+import com.example.emos.wx.task.MessageTask;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,6 +41,9 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
 
     @Resource
     private TbUserMapper tbUserMapper;
+
+    @Autowired
+    private MessageTask messageTask;
 
     /**
      * 获取到微信OpenId
@@ -87,6 +93,16 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
                 param.put("root", true);
                 tbUserMapper.insert(param);
                 int id = tbUserMapper.searchIdByOpenId(openId);
+
+
+
+                MessageEntity entity = new MessageEntity();
+                entity.setSenderId(0);
+                entity.setSenderName("系统消息");
+                entity.setUuid(IdUtil.simpleUUID());
+                entity.setMsg("欢迎您注册成为超级管理员，请及时更新你的员工个人信息。");
+                entity.setSendTime(new Date());
+                messageTask.sendAsync(id + "", entity);
                 return id;
             }else {
                 //如果root已经绑定了，就抛出异常
