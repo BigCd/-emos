@@ -138,7 +138,8 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
         if(id==null){
             throw new EmosException("账户不存在");
         }
-        //TODO从消息队列中接受消息，转移到消息表
+        //从消息队列中接受消息，转移到消息表
+        messageTask.receiveAysnc(id+"");
         return id;
     }
 

@@ -65,6 +65,10 @@ public class UserController {
     @ApiOperation("用户登录")
     public R login(@Valid @RequestBody LoginForm form, @RequestHeader("token") String token) {
         Integer id;
+        //测试rabbitmq接收消息，清除token
+/*        if (StrUtil.isNotEmpty(token)) {
+            token = "";
+        }*/
         if (StrUtil.isNotEmpty(token)) {
             jwtUtil.verifierToken(token);   //验证令牌的有效性
             id = jwtUtil.getUserId(token);
