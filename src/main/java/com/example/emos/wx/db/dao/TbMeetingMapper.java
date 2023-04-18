@@ -3,6 +3,9 @@ package com.example.emos.wx.db.dao;
 import com.example.emos.wx.db.pojo.TbMeeting;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
 * @author Administrator
 * @description 针对表【tb_meeting(会议表)】的数据库操作Mapper
@@ -11,6 +14,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface TbMeetingMapper extends BaseMapper<TbMeeting> {
     public int insertMeeting(TbMeeting entity);
+
+    public ArrayList<HashMap> searchMyMeetingListByPage(HashMap param);
 
 }
 
