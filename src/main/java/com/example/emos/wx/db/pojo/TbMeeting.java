@@ -39,27 +39,32 @@ public class TbMeeting implements Serializable {
     /**
      * 日期
      */
-    private Date date;
+    private String date;
+    //private Date date;
 
     /**
      * 开会地点
      */
     private String place;
+    //private String place;
 
     /**
      * 开始时间
      */
-    private Date start;
+    private String start;
+    //private Date start;
 
     /**
      * 结束时间
      */
-    private Date end;
+    private String end;
+    //private Date end;
 
     /**
      * 会议类型（1在线会议，2线下会议）
      */
-    private Integer type;
+    //private Integer type;
+    private Short type;
 
     /**
      * 参与者
@@ -79,7 +84,8 @@ public class TbMeeting implements Serializable {
     /**
      * 状态（1未开始，2进行中，3已结束）
      */
-    private Integer status;
+    //private Integer status;
+    private Short status;
 
     /**
      * 创建时间

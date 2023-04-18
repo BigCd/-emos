@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.example.emos.wx.db.dao.pojo.TbMeeting
 */
 public interface TbMeetingMapper extends BaseMapper<TbMeeting> {
+    public int insertMeeting(TbMeeting entity);
 
 }
 

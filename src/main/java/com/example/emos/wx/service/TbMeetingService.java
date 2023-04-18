@@ -9,5 +9,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2023-03-23 19:00:59
 */
 public interface TbMeetingService extends IService<TbMeeting> {
+        public void insertMeeting(TbMeeting entity);
 
 }

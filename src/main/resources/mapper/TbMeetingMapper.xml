@@ -28,4 +28,24 @@
         members,desc,instance_id,
         status,create_time
     </sql>
+
+    <insert id="insertMeeting" parameterType="com.example.emos.wx.db.pojo.TbMeeting">
+        INSERT INTO tb_meeting
+        SET uuid = #{uuid},
+        title = #{title},
+        date = #{date},
+        creator_id = #{creatorId},
+        <if test="place!=null">
+            place = #{place},
+        </if>
+        start = #{start},
+        end = #{end},
+        type = #{type},
+        members = #{members},
+        `desc` = #{desc},
+        instance_id = #{instanceId},
+        status = #{status},
+        create_time = NOW()
+    </insert>
+
 </mapper>
