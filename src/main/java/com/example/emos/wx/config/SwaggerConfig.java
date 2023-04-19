@@ -1,6 +1,7 @@
 package com.example.emos.wx.config;
 
 import io.swagger.annotations.ApiOperation;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -22,6 +23,7 @@ import java.util.List;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+    @Bean
     public Docket createRestApi(){
         Docket docket = new Docket(DocumentationType.SWAGGER_2);
         // ApiInfoBuilder 用于在Swagger界面上添加各种信息
@@ -59,5 +61,7 @@ public class SwaggerConfig {
         docket.securityContexts(cxtList);
         return docket;
     }
+
+
 
 }

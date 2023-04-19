@@ -3,6 +3,7 @@ package com.example.emos.wx.service;
 import com.example.emos.wx.db.pojo.TbUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -23,5 +24,7 @@ public interface TbUserService extends IService<TbUser> {
     public String searchUserHiredate(int userId);
 
     public HashMap searchUserSummary(int userId);
+
+    public ArrayList<HashMap> searchUserGroupByDept(String keyword);
 
 }

@@ -3,6 +3,9 @@ package com.example.emos.wx.db.dao;
 import com.example.emos.wx.db.pojo.TbDept;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
 * @author Administrator
 * @description 针对表【tb_dept】的数据库操作Mapper
@@ -10,6 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.example.emos.wx.db.dao.pojo.TbDept
 */
 public interface TbDeptMapper extends BaseMapper<TbDept> {
+    public ArrayList<HashMap> searchDeptMembers(String keyword);
 
 }
 

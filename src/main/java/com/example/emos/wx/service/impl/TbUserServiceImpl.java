@@ -5,6 +5,7 @@ import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.emos.wx.db.dao.TbDeptMapper;
 import com.example.emos.wx.db.pojo.MessageEntity;
 import com.example.emos.wx.db.pojo.TbUser;
 import com.example.emos.wx.exception.EmosException;
@@ -18,6 +19,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
@@ -44,6 +46,9 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
 
     @Autowired
     private MessageTask messageTask;
+
+    @Resource
+    private TbDeptMapper tbDeptMapper;
 
     /**
      * 获取到微信OpenId
@@ -170,6 +175,24 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
     public HashMap searchUserSummary(int userId) {
         HashMap map = tbUserMapper .searchUserSummary(userId);
         return map;
+    }
+
+    @Override
+    public ArrayList<HashMap> searchUserGroupByDept(String keyword) {
+        ArrayList<HashMap> list_1 = tbDeptMapper.searchDeptMembers(keyword);
+        ArrayList<HashMap> list_2 = tbUserMapper.searchUserGroupByDept(keyword);
+        for (HashMap map_1:list_1) {
+            long deptId = (Long)map_1.get("id");
+            ArrayList members = new ArrayList();
+            for(HashMap map_2 : list_2){
+                long id = (Long)map_2.get("deptId");
+                if(deptId == id){
+                    members.add(map_2);
+                }
+            }
+            map_1.put("members",members);
+        }
+        return list_1;
     }
 
 

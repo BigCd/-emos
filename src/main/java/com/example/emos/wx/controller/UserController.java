@@ -5,6 +5,7 @@ import com.example.emos.wx.common.util.R;
 import com.example.emos.wx.config.shiro.JwtUtil;
 import com.example.emos.wx.controller.form.LoginForm;
 import com.example.emos.wx.controller.form.RegisterForm;
+import com.example.emos.wx.controller.form.SearchUserGroupByDeptForm;
 import com.example.emos.wx.service.TbUserService;
 import com.example.emos.wx.task.MessageTask;
 import io.swagger.annotations.Api;
@@ -18,6 +19,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -97,6 +99,14 @@ public class UserController {
         int userId = jwtUtil.getUserId(token);
         HashMap map = tbUserService.searchUserSummary(userId);
         return R.ok().put("result", map);
+    }
+
+    @PostMapping("/searchUserGroupByDept")
+    @ApiOperation("查询员工列表，按照部门分组排列")
+    @RequiresPermissions(value = {"ROOT", "EMPLOYEE:SELECT"}, logical = Logical.OR)
+    public R searchUserGroupByDept(@Valid @RequestBody SearchUserGroupByDeptForm form){
+        ArrayList<HashMap> list = tbUserService.searchUserGroupByDept(form.getKeyword());
+        return R.ok().put("result",list);
     }
 
 

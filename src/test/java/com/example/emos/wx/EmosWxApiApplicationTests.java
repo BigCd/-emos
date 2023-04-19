@@ -51,13 +51,13 @@ class EmosWxApiApplicationTests {
             meeting.setId((long)i);
             meeting.setUuid(IdUtil.simpleUUID());
             meeting.setTitle("测试会议"+i);
-            meeting.setCreatorId(15L); //ROOT用户ID
+            meeting.setCreatorId(21L); //ROOT用户ID
             meeting.setDate(DateUtil.today());
             meeting.setPlace("线上会议室");
             meeting.setStart("08:30");
             meeting.setEnd("10:30");
             meeting.setType((short) 1);
-            meeting.setMembers("[15,16]");
+            meeting.setMembers("[21,22]");
             meeting.setDesc("会议研讨Emos项目上线测试");
             meeting.setInstanceId(IdUtil.simpleUUID());
             meeting.setStatus((short)3);

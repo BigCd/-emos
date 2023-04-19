@@ -70,10 +70,12 @@ mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
+#spring boot集成mybatis的方式打印sql
 logging:
   level:
     root: info
-    com.example.emos.wx.db.dao : warn
+    #com.example.emos.wx.db.dao : warn
+    com.example.emos.wx.db.dao : debug
   pattern:
     console: "%d{HH:mm:ss}  %-5level  %msg%n"
 emos:
@@ -95,6 +97,9 @@ emos:
 wx:
   app-id: wx83f8fbbf27659300
   app-secret: 42b9773df65c58e5278d3be27a9be289
+
+
+
 
 
 
