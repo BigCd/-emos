@@ -93,6 +93,10 @@ emos:
     system: heyun.yair@foxmail.com
     hr: 1293360341@qq.com
   image-folder: C:/hy/emos/image
+  code: 3E2E7B3FF0944BD2
+  recieveNotify: http://IP地址:8080/emos-wx-api/meeting/recieveNotify
+workflow:
+    url: http://IP地址:9090/emos-workflow
 
 wx:
   app-id: wx83f8fbbf27659300

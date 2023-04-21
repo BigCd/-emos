@@ -19,10 +19,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 /**
 * @author Administrator
@@ -193,6 +190,12 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
             map_1.put("members",members);
         }
         return list_1;
+    }
+
+    @Override
+    public ArrayList<HashMap> searchMembers(List param) {
+        ArrayList<HashMap> list = tbUserMapper.searchMembers(param);
+        return list;
     }
 
 

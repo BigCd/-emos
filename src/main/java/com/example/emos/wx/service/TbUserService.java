@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -26,5 +27,7 @@ public interface TbUserService extends IService<TbUser> {
     public HashMap searchUserSummary(int userId);
 
     public ArrayList<HashMap> searchUserGroupByDept(String keyword);
+
+    public ArrayList<HashMap> searchMembers(List param);
 
 }

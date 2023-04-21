@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -31,7 +32,12 @@ public interface TbUserMapper extends BaseMapper<TbUser> {
 
     public ArrayList<HashMap> searchUserGroupByDept(String keyword);
 
+    public ArrayList<HashMap> searchMembers(List param);
 
+    public HashMap searchUserInfo(int userId);
+    public int searchDeptManagerId(int id);
+
+    public int searchGmId();
 
 
 }

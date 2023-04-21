@@ -17,6 +17,10 @@ public interface TbMeetingMapper extends BaseMapper<TbMeeting> {
 
     public ArrayList<HashMap> searchMyMeetingListByPage(HashMap param);
 
+    public boolean searchMeetingMembersInSameDept(String uuid);
+    
+    public int updateMeetingInstanceId(HashMap map);
+
 }
 
 
