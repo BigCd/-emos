@@ -6,6 +6,7 @@ import cn.hutool.json.JSONUtil;
 import com.example.emos.wx.common.util.R;
 import com.example.emos.wx.config.shiro.JwtUtil;
 import com.example.emos.wx.controller.form.InsertMeetingForm;
+import com.example.emos.wx.controller.form.SearchMeetingByIdFrom;
 import com.example.emos.wx.controller.form.SearchMyMeetingListByPageForm;
 import com.example.emos.wx.db.pojo.TbMeeting;
 import com.example.emos.wx.exception.EmosException;
@@ -54,8 +55,8 @@ public class MeetingController {
         if(form.getType() == 2 && (form.getPlace() == null || form.getPlace().length() == 0)){
             throw new EmosException("线下会议地点不能为空");
         }
-        DateTime d1 = DateUtil.parse(form.getDate()+""+form.getStart()+":00");
-        DateTime d2 = DateUtil.parse(form.getDate() + " " + form.getEnd() + ":00");
+        DateTime d1= DateUtil.parse(form.getDate()+" "+form.getStart()+":00");
+        DateTime d2= DateUtil.parse(form.getDate()+" "+form.getEnd()+":00");
         if(d2.isBeforeOrEquals(d1)){
             throw new EmosException("结束时间必须大于开始时间");
         }
@@ -78,5 +79,13 @@ public class MeetingController {
         entity.setStatus((short)1);
         tbMeetingService.insertMeeting(entity);
         return R.ok().put("result","success");
+    }
+
+    @PostMapping("/seachMeetingById")
+    @ApiOperation("根据ID查询会议")
+    @RequiresPermissions(value = {"ROOT","MEETING:SELECT"},logical = Logical.OR)
+    public R searchMeetingById(@Valid @RequestBody SearchMeetingByIdFrom form){
+        HashMap map = tbMeetingService.searchMeetingById(form.getId());
+        return R.ok().put("result",map);
     }
 }

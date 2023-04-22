@@ -15,7 +15,8 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/emos?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      #url: jdbc:mysql://localhost:3306/emos?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      url: jdbc:mysql://172.20.10.18:3306/emos?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       username: root
       password: root123
       initial-size: 8
@@ -74,8 +75,8 @@ mybatis:
 logging:
   level:
     root: info
-    #com.example.emos.wx.db.dao : warn
-    com.example.emos.wx.db.dao : debug
+    com.example.emos.wx.db.dao : warn
+    #com.example.emos.wx.db.dao : debug
   pattern:
     console: "%d{HH:mm:ss}  %-5level  %msg%n"
 emos:
@@ -87,16 +88,16 @@ emos:
     #令牌缓存时间（天数）
     cache-expire: 10
   face:
-    createFaceModelUrl: http://192.168.100.90:3000/create_face_model
-    checkinUrl: http://192.168.100.90:3000/checkin
+    createFaceModelUrl: http://172.20.10.19:3000/create_face_model
+    checkinUrl: http://172.20.10.19:3000/checkin
   email:
     system: heyun.yair@foxmail.com
     hr: 1293360341@qq.com
   image-folder: C:/hy/emos/image
   code: 3E2E7B3FF0944BD2
-  recieveNotify: http://IP地址:8080/emos-wx-api/meeting/recieveNotify
+  recieveNotify: http://172.20.10.19:8080/emos-wx-api/meeting/recieveNotify
 workflow:
-    url: http://IP地址:9090/emos-workflow
+    url: http://172.20.10.19:9090/emos-workflow
 
 wx:
   app-id: wx83f8fbbf27659300

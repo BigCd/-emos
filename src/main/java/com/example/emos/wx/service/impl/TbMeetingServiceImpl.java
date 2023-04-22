@@ -51,7 +51,8 @@ public class TbMeetingServiceImpl extends ServiceImpl<TbMeetingMapper, TbMeeting
         if (row != 1) {
             throw new EmosException("会议添加失败");
         }
-        //TODO 开启审批工作流
+        // 开启审批工作流
+        startMeetingWorkflow(entity.getUuid(), entity.getCreatorId().intValue(), entity.getDate(), entity.getStart());
 
     }
 
@@ -82,6 +83,14 @@ public class TbMeetingServiceImpl extends ServiceImpl<TbMeetingMapper, TbMeeting
         }
 
         return resultList;
+    }
+
+    @Override
+    public HashMap searchMeetingById(int id) {
+        HashMap map = tbMeetingMapper.searchMeetingById(id);
+        ArrayList<HashMap> list = tbMeetingMapper.searchMeetingMembers(id);
+        map.put("members", list);
+        return map;
     }
 
     public void startMeetingWorkflow(String uuid,int creatorId,String date,String start){
