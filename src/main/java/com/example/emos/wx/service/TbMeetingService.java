@@ -18,4 +18,6 @@ public interface TbMeetingService extends IService<TbMeeting> {
 
         public HashMap searchMeetingById(int id);
 
+        public void updateMeetingInfo(HashMap param);
+
 }

@@ -81,7 +81,7 @@ public class MeetingController {
         return R.ok().put("result","success");
     }
 
-    @PostMapping("/seachMeetingById")
+    @PostMapping("/searchMeetingById")
     @ApiOperation("根据ID查询会议")
     @RequiresPermissions(value = {"ROOT","MEETING:SELECT"},logical = Logical.OR)
     public R searchMeetingById(@Valid @RequestBody SearchMeetingByIdFrom form){
