@@ -133,6 +133,12 @@
         WHERE id = #{id} AND status=3
     </update>
 
+    <delete id="deleteMeetingById" parameterType="int">
+        DELETE FROM tb_meeting
+        WHERE id=#{id} AND status=3
+    </delete>
+
+
 
 
 

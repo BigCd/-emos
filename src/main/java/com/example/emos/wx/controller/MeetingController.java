@@ -5,10 +5,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.json.JSONUtil;
 import com.example.emos.wx.common.util.R;
 import com.example.emos.wx.config.shiro.JwtUtil;
-import com.example.emos.wx.controller.form.InsertMeetingForm;
-import com.example.emos.wx.controller.form.SearchMeetingByIdFrom;
-import com.example.emos.wx.controller.form.SearchMyMeetingListByPageForm;
-import com.example.emos.wx.controller.form.UpdateMeetingInfoForm;
+import com.example.emos.wx.controller.form.*;
 import com.example.emos.wx.db.pojo.TbMeeting;
 import com.example.emos.wx.exception.EmosException;
 import com.example.emos.wx.service.TbMeetingService;
@@ -118,6 +115,14 @@ public class MeetingController {
         param.put("instanceId",form.getInstanceId());
         param.put("status",1);
         tbMeetingService.updateMeetingInfo(param);
+        return R.ok().put("result","success");
+    }
+
+   @PostMapping("deleteMeetingById")
+   @ApiOperation("/根据ID删除会议")
+   @RequiresPermissions(value = {"ROOT", "MEETING:DELETE"}, logical = Logical.OR)
+    public R deleteMeetingById(@Valid @RequestBody DeleteMeetingByIdForm form){
+        tbMeetingService.deleteMeetingById(form.getId());
         return R.ok().put("result","success");
     }
 }

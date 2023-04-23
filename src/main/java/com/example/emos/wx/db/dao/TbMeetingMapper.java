@@ -27,6 +27,8 @@ public interface TbMeetingMapper extends BaseMapper<TbMeeting> {
 
     public int updateMeetingInfo(HashMap param);
 
+    public int deleteMeetingById(int id);
+
 }
 
 
