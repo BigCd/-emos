@@ -30,4 +30,6 @@ public interface TbUserService extends IService<TbUser> {
 
     public ArrayList<HashMap> searchMembers(List param);
 
+    public List<HashMap> selectUserPhotoAndName(List param);
+
 }

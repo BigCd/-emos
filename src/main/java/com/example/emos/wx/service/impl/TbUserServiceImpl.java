@@ -198,6 +198,12 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
         return list;
     }
 
+    @Override
+    public List<HashMap> selectUserPhotoAndName(List param) {
+        List<HashMap> list = tbUserMapper.selectUserPhotoAndName(param);
+        return list;
+    }
+
 
 }
 

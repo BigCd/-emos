@@ -4,10 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.example.emos.wx.common.util.R;
 import com.example.emos.wx.config.shiro.JwtUtil;
-import com.example.emos.wx.controller.form.LoginForm;
-import com.example.emos.wx.controller.form.RegisterForm;
-import com.example.emos.wx.controller.form.SearchMembersForm;
-import com.example.emos.wx.controller.form.SearchUserGroupByDeptForm;
+import com.example.emos.wx.controller.form.*;
 import com.example.emos.wx.exception.EmosException;
 import com.example.emos.wx.service.TbUserService;
 import com.example.emos.wx.task.MessageTask;
@@ -123,6 +120,18 @@ public class UserController {
         List param = JSONUtil.parseArray(form.getMembers()).toList(Integer.class);
         ArrayList list = tbUserService.searchMembers(param);
         return R.ok().put("result", list);
+    }
+
+    @PostMapping("/selectUserPhotoAndName")
+    @ApiOperation("查询用户姓名和头像")
+    @RequiresPermissions(value = {"WORKFLOW:APPROVAL"})
+    public R selectUserPhotoAndName(@Valid @RequestBody SelectUserPhotoAndNameForm form){
+        if(!JSONUtil.isJsonArray(form.getIds())){
+            throw new EmosException("参数不是JSON数组");
+        }
+        List<Integer> param = JSONUtil.parseArray(form.getIds()).toList(Integer.class);
+        List<HashMap> list = tbUserService.selectUserPhotoAndName(param);
+        return R.ok().put("result",list);
     }
 
 

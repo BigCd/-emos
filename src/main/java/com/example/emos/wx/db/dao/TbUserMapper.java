@@ -39,6 +39,8 @@ public interface TbUserMapper extends BaseMapper<TbUser> {
 
     public int searchGmId();
 
+    public List<HashMap> selectUserPhotoAndName(List param);
+
 
 }
 
