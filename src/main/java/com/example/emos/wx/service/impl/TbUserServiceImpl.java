@@ -204,6 +204,12 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
         return list;
     }
 
+    @Override
+    public String searchMemberEmail(int id) {
+        String email = tbUserMapper.searchMemberEmail(id);
+        return email;
+    }
+
 
 }
 

@@ -41,6 +41,8 @@ public interface TbUserMapper extends BaseMapper<TbUser> {
 
     public List<HashMap> selectUserPhotoAndName(List param);
 
+    public String searchMemberEmail(int id);
+
 
 }
 

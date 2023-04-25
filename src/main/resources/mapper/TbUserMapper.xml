@@ -177,6 +177,12 @@
     </select>
 
 
+    <select id="searchMemberEmail" parameterType="int" resultType="String">
+        SELECT email FROM tb_user WHERE id=#{id} AND status = 1
+    </select>
+
+
+
 
 
 

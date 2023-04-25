@@ -65,8 +65,8 @@ public class MessageTask {
         int i = 0;
         try(
                 //接收消息数据
-                Connection connection = factory.newConnection();
-                Channel channel = connection.createChannel()){
+            Connection connection = factory.newConnection();
+            Channel channel = connection.createChannel()){
             //从队列中获取消息，不自动确认
             channel.queueDeclare(topic,true,false,false,null);
             //Topic中有多少条数据未知，所以使用死循环接收数据，直到接收不到消息，退出死循环

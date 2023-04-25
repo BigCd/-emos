@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.example.emos.wx.common.util.R;
 import com.example.emos.wx.config.shiro.JwtUtil;
+import com.example.emos.wx.config.tencent.TLSSigAPIv2;
 import com.example.emos.wx.controller.form.*;
 import com.example.emos.wx.exception.EmosException;
 import com.example.emos.wx.service.TbUserService;
@@ -40,6 +41,16 @@ public class UserController {
 
     @Value("${emos.jwt.cache-expire}")
     private int cacheExpire;
+
+
+    @Value("${trtc.appid}")
+    private Integer appid;
+
+    @Value("${trtc.key}")
+    private String key;
+
+    @Value("${trtc.expire}")
+    private Integer expire;
 
 
 
@@ -132,6 +143,14 @@ public class UserController {
         List<Integer> param = JSONUtil.parseArray(form.getIds()).toList(Integer.class);
         List<HashMap> list = tbUserService.selectUserPhotoAndName(param);
         return R.ok().put("result",list);
+    }
+
+    public R genUserSig(@RequestHeader("token") String token){
+        int id = jwtUtil.getUserId(token);
+        String email = tbUserService.searchMemberEmail(id);
+        TLSSigAPIv2 api = new TLSSigAPIv2(appid,key);
+        String userSig = api.genUserSig(email,expire);
+        return R.ok().put("userSig",userSig).put("email",email);
     }
 
 
