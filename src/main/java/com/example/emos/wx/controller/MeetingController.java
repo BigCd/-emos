@@ -139,4 +139,9 @@ public class MeetingController {
         }
         return R.ok();
     }
+
+    public R searchRoomIdByUUID(@Valid @RequestBody SearchRoomIdByUUIDForm form){
+        long roomId = tbMeetingService.searchRoomIdByUUID(form.getUuid());
+        return R.ok().put("result", roomId);
+    }
 }

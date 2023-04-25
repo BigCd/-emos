@@ -17,6 +17,7 @@ import com.example.emos.wx.service.TbMeetingService;
 import com.example.emos.wx.db.dao.TbMeetingMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -46,6 +47,9 @@ public class TbMeetingServiceImpl extends ServiceImpl<TbMeetingMapper, TbMeeting
 
     @Value("${emos.recieveNotify}")
     private String recieveNotify;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Override
     public void insertMeeting(TbMeeting entity) {
@@ -158,6 +162,13 @@ public class TbMeetingServiceImpl extends ServiceImpl<TbMeetingMapper, TbMeeting
             log.error("删除工作流失败");
             throw new EmosException("删除工作流失败");
         }
+    }
+
+    @Override
+    public Long searchRoomIdByUUID(String uuid) {
+        Object temp = redisTemplate.opsForValue().get(uuid);
+        long roomId = Long.parseLong(temp.toString());
+        return roomId;
     }
 
     public void startMeetingWorkflow(String uuid,int creatorId,String date,String start){

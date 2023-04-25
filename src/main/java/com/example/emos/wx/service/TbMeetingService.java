@@ -22,6 +22,8 @@ public interface TbMeetingService extends IService<TbMeeting> {
 
         public void deleteMeetingById(int id);
 
+        public Long searchRoomIdByUUID(String uuid);
+
 
 
 }
