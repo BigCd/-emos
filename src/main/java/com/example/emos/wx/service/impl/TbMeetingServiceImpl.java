@@ -24,6 +24,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 /**
 * @author Administrator
@@ -169,6 +170,12 @@ public class TbMeetingServiceImpl extends ServiceImpl<TbMeetingMapper, TbMeeting
         Object temp = redisTemplate.opsForValue().get(uuid);
         long roomId = Long.parseLong(temp.toString());
         return roomId;
+    }
+
+    @Override
+    public List<String> searchUserMeetingInMonth(HashMap param) {
+        List list = tbMeetingMapper.searchUserMeetingInMonth(param);
+        return list;
     }
 
     public void startMeetingWorkflow(String uuid,int creatorId,String date,String start){

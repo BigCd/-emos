@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
 * @author Administrator
@@ -25,5 +26,5 @@ public interface TbMeetingService extends IService<TbMeeting> {
         public Long searchRoomIdByUUID(String uuid);
 
 
-
+        public List<String> searchUserMeetingInMonth(HashMap param);
 }

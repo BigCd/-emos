@@ -3,6 +3,9 @@ package com.example.emos.wx.db.dao;
 import com.example.emos.wx.db.pojo.TbRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
 * @author Administrator
 * @description 针对表【tb_role(角色表)】的数据库操作Mapper
@@ -10,7 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.example.emos.wx.db.dao.pojo.TbRole
 */
 public interface TbRoleMapper extends BaseMapper<TbRole> {
-
+    public ArrayList<HashMap> searchRoleOwnPermission(int id);
 }
 
 

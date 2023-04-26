@@ -145,6 +145,8 @@ public class UserController {
         return R.ok().put("result",list);
     }
 
+    @GetMapping("/genUserSig")
+    @ApiOperation("生成用户签名")
     public R genUserSig(@RequestHeader("token") String token){
         int id = jwtUtil.getUserId(token);
         String email = tbUserService.searchMemberEmail(id);

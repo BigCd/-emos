@@ -75,8 +75,8 @@ mybatis:
 logging:
   level:
     root: info
-    #com.example.emos.wx.db.dao : warn
-    com.example.emos.wx.db.dao : debug
+    com.example.emos.wx.db.dao : warn
+    #com.example.emos.wx.db.dao : debug
   pattern:
     console: "%d{HH:mm:ss}  %-5level  %msg%n"
 emos:
@@ -106,11 +106,14 @@ workflow:
 wx:
   app-id: wx83f8fbbf27659300
   app-secret: 42b9773df65c58e5278d3be27a9be289
+  #app-id: wx4cb8e9621950da45
+  #app-secret: 86c4ecfa6be49444ab9b2e9c1490b5aa
 
 trtc:
-  appId: 1400737358
-  secretKey: b4f9184033fef6938067b17106284869e03734972445c5d3155ffb5d751e9cf9
+  appid: 1400737358
+  key: b4f9184033fef6938067b17106284869e03734972445c5d3155ffb5d751e9cf9
   expire: 86400
+
 
 
 

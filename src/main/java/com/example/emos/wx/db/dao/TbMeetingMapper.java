@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
 * @author Administrator
@@ -28,6 +29,8 @@ public interface TbMeetingMapper extends BaseMapper<TbMeeting> {
     public int updateMeetingInfo(HashMap param);
 
     public int deleteMeetingById(int id);
+
+    public List<String> searchUserMeetingInMonth(HashMap param);
 
 }
 
