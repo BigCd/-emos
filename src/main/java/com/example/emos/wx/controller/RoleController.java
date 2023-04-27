@@ -79,6 +79,8 @@ public class RoleController {
         return R.ok().put("result",list);
     }
 
+    @PostMapping("/deleteRoleById")
+    @ApiOperation("根据ID删除角色")
     public R deleteRoleById(@Valid @RequestBody DeleteRoleByIdForm form){
         tbRoleService.deleteRoleById(form.getId());
         return R.ok().put("result","success");
