@@ -11,7 +11,7 @@ public class RabbitMQConfig {
         ConnectionFactory factory = new ConnectionFactory();
         //Linux主机的IP地址
         //factory.setHost("172.20.10.19");
-        factory.setHost("172.20.10.2");
+        factory.setHost("172.20.10.4");
         factory.setPort(5672);//RabbitMQ端口号
         return factory;
     }

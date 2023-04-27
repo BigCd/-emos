@@ -2,6 +2,7 @@ package com.example.emos.wx.controller;
 
 import cn.hutool.json.JSONUtil;
 import com.example.emos.wx.common.util.R;
+import com.example.emos.wx.controller.form.DeleteRoleByIdForm;
 import com.example.emos.wx.controller.form.InsertRoleForm;
 import com.example.emos.wx.controller.form.SearchRoleOwnPermissionForm;
 import com.example.emos.wx.controller.form.UpdateRolePermissionsForm;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/role")
@@ -67,6 +69,18 @@ public class RoleController {
         entity.setId(form.getId());
         entity.setPermissions(form.getPermissions());;
         tbRoleService.updateRolePermissions(entity);
+        return R.ok().put("result","success");
+    }
+
+    @GetMapping("/searchAllRole")
+    @ApiOperation("查询所有角色数据")
+    public R searchAllRole() {
+        List<TbRole> list = tbRoleService.searchAllRole();
+        return R.ok().put("result",list);
+    }
+
+    public R deleteRoleById(@Valid @RequestBody DeleteRoleByIdForm form){
+        tbRoleService.deleteRoleById(form.getId());
         return R.ok().put("result","success");
     }
 }

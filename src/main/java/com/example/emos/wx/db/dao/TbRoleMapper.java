@@ -6,6 +6,7 @@ import org.mybatis.spring.annotation.MapperScan;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
 * @author Administrator
@@ -18,9 +19,16 @@ public interface TbRoleMapper extends BaseMapper<TbRole> {
 
     public ArrayList<HashMap> searchAllPermission();
 
+
+
     public int insertRole(TbRole role);
 
     public int updateRolePermissions(TbRole role);
+
+    public List<TbRole> searchAllRole();
+
+    public long searchRoleUsersCount(int id);
+    public int deleteRoleById(int id);
 }
 
 

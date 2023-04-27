@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 /**
 * @author Administrator
@@ -58,6 +59,24 @@ public class TbRoleServiceImpl extends ServiceImpl<TbRoleMapper, TbRole>
         }
     }
 
+    @Override
+    public List<TbRole> searchAllRole() {
+        List<TbRole> list = tbRoleMapper.searchAllRole();
+        return list;
+    }
+
+    @Override
+    public void deleteRoleById(int id) {
+        long count = tbRoleMapper.searchRoleUsersCount(id);
+        if(count > 0){
+            throw new EmosException("该角色关联着用户，所以无法删除");
+        }
+        int row = tbRoleMapper.deleteRoleById(id);
+        if(row != 1){
+           throw new EmosException("角色删除失败");
+        }
+    }
+
     /**
      * 将查询结果按照模块名称分组
      * @param list
@@ -98,6 +117,7 @@ public class TbRoleServiceImpl extends ServiceImpl<TbRoleMapper, TbRole>
         }
         return permsList;
     }
+
 }
 
 

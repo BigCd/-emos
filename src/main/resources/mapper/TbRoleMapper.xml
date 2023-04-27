@@ -50,6 +50,22 @@
         WHERE id=#{id}
     </update>
 
+    <select id="searchAllRole" resultType="com.example.emos.wx.db.pojo.TbRole">
+        SELECT id, role_name FROM tb_role ORDER BY id;
+    </select>
+
+    <select id="searchRoleUsersCount" parameterType="int" resultType="long">
+        SELECT COUNT(*) AS count
+        FROM tb_user u
+            JOIN tb_role r ON JSON_CONTAINS(u.role, CAST(r.id AS CHAR))
+        WHERE r.id=#{id};
+    </select>
+
+    <delete id="deleteRoleById" parameterType="int">
+        DELETE FROM tb_role WHERE id=#{id}
+    </delete>
+
+
 
 
 </mapper>

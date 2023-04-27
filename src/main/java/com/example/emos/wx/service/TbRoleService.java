@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
 * @author Administrator
@@ -19,4 +20,8 @@ public interface TbRoleService extends IService<TbRole> {
     public void insertRole(TbRole role);
 
     public void updateRolePermissions(TbRole role);
+
+    public List<TbRole> searchAllRole();
+
+    public void deleteRoleById(int id);
 }
