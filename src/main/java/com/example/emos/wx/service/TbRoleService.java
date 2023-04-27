@@ -13,4 +13,10 @@ import java.util.HashMap;
 */
 public interface TbRoleService extends IService<TbRole> {
     public ArrayList<HashMap> searchRoleOwnPermission(int id);
+
+    public ArrayList<HashMap> searchAllPermission();
+
+    public void insertRole(TbRole role);
+
+    public void updateRolePermissions(TbRole role);
 }

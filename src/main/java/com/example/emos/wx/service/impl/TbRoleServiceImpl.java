@@ -3,11 +3,13 @@ package com.example.emos.wx.service.impl;
 import cn.hutool.json.JSONObject;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.emos.wx.db.pojo.TbRole;
+import com.example.emos.wx.exception.EmosException;
 import com.example.emos.wx.service.TbRoleService;
 import com.example.emos.wx.db.dao.TbRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -21,15 +23,39 @@ import java.util.HashSet;
 public class TbRoleServiceImpl extends ServiceImpl<TbRoleMapper, TbRole>
     implements TbRoleService{
 
-    @Autowired
-    private TbRoleService tbRoleService;
+    @Resource
+    private TbRoleMapper tbRoleMapper;
 
 
     @Override
     public ArrayList<HashMap> searchRoleOwnPermission(int id) {
-        ArrayList<HashMap> list =  tbRoleService.searchRoleOwnPermission(id);
+        ArrayList<HashMap> list =  tbRoleMapper.searchRoleOwnPermission(id);
         list = handleDate(list);
          return list;
+    }
+
+    @Override
+    public ArrayList<HashMap> searchAllPermission() {
+        ArrayList<HashMap> list = tbRoleMapper.searchAllPermission();
+        list = handleDate(list);
+        return list;
+    }
+
+    @Override
+    public void insertRole(TbRole role) {
+        int row = tbRoleMapper.insertRole(role);
+        if(row != 1){
+            throw  new EmosException("添加角色失败");
+        }
+
+    }
+
+    @Override
+    public void updateRolePermissions(TbRole role) {
+        int row = tbRoleMapper.updateRolePermissions(role);
+        if(row != 1){
+            throw  new EmosException("修改角色失败");
+        }
     }
 
     /**

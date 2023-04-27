@@ -2,6 +2,7 @@ package com.example.emos.wx.db.dao;
 
 import com.example.emos.wx.db.pojo.TbRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.mybatis.spring.annotation.MapperScan;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +15,12 @@ import java.util.HashMap;
 */
 public interface TbRoleMapper extends BaseMapper<TbRole> {
     public ArrayList<HashMap> searchRoleOwnPermission(int id);
+
+    public ArrayList<HashMap> searchAllPermission();
+
+    public int insertRole(TbRole role);
+
+    public int updateRolePermissions(TbRole role);
 }
 
 

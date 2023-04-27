@@ -90,8 +90,8 @@ emos:
   face:
     #createFaceModelUrl: http://172.20.10.19:3000/create_face_model
     #checkinUrl: http://172.20.10.19:3000/checkin
-     createFaceModelUrl: http://172.20.10.2:3000/create_face_model
-     checkinUrl: http://172.20.10.2:3000/checkin
+     createFaceModelUrl: http://172.20.10.4:3000/create_face_model
+     checkinUrl: http://172.20.10.4:3000/checkin
   email:
     system: heyun.yair@foxmail.com
     hr: 1293360341@qq.com
@@ -101,13 +101,13 @@ emos:
   recieveNotify: http://172.20.10.3:8080/emos-wx-api/meeting/recieveNotify
 workflow:
     #url: http://172.20.10.19:9090/emos-workflow
-     url: http://172.20.10.2:9090/emos-workflow
+     url: http://172.20.10.4:9090/emos-workflow
 
 wx:
-  app-id: wx83f8fbbf27659300
-  app-secret: 42b9773df65c58e5278d3be27a9be289
-  #app-id: wx4cb8e9621950da45
-  #app-secret: 86c4ecfa6be49444ab9b2e9c1490b5aa
+  #app-id: wx83f8fbbf27659300
+  #app-secret: 42b9773df65c58e5278d3be27a9be289
+  app-id: wx4cb8e9621950da45
+  app-secret: 86c4ecfa6be49444ab9b2e9c1490b5aa
 
 trtc:
   appid: 1400737358
