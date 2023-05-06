@@ -125,7 +125,7 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
             throw new EmosException("不存在这个激活码");
         }
         else{
-            int userId = Integer.parseInt(redisTemplate.opsForValue().get("redisterCode").toString());
+            int userId = Integer.parseInt(redisTemplate.opsForValue().get(registerCode).toString());
             //把当前用户绑定到ROOT账户
             TbUser entity = new TbUser();
             String openId = getOpenId(code);

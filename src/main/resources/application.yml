@@ -104,10 +104,10 @@ workflow:
      url: http://192.168.31.145:9090/emos-workflow
 
 wx:
-  #app-id: wx83f8fbbf27659300
-  #app-secret: 42b9773df65c58e5278d3be27a9be289
-  app-id: wx4cb8e9621950da45
-  app-secret: 86c4ecfa6be49444ab9b2e9c1490b5aa
+  app-id: wx83f8fbbf27659300
+  app-secret: 42b9773df65c58e5278d3be27a9be289
+  #app-id: wx4cb8e9621950da45
+  #app-secret: 86c4ecfa6be49444ab9b2e9c1490b5aa
 
 trtc:
   appid: 1400737358
