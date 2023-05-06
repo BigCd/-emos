@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -50,6 +51,9 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
 
     @Autowired
     private ActiveCodeTask activeCodeTask;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 获取到微信OpenId
@@ -115,9 +119,27 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
                 throw new EmosException("无法绑定超级管理员账号");
             }
         }
-        //TODO 此处还有其他判断内容
+        // 此处还有其他判断内容
+        else if(!redisTemplate.hasKey(registerCode)){
+            //判断邀请码是否有效
+            throw new EmosException("不存在这个激活码");
+        }
         else{
-            return 0;
+            int userId = Integer.parseInt(redisTemplate.opsForValue().get("redisterCode").toString());
+            //把当前用户绑定到ROOT账户
+            TbUser entity = new TbUser();
+            String openId = getOpenId(code);
+            HashMap param = new HashMap();
+            param.put("openId",openId);
+            param.put("nickname",nickname);
+            param.put("photo",photo);
+            param.put("userId",userId);
+            int row = tbUserMapper.activeUserAccount(param);
+            if(row !=1){
+                throw new EmosException("账号激活失败");
+            }
+            redisTemplate.delete(registerCode);
+            return userId;
         }
     }
 

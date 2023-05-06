@@ -47,7 +47,7 @@ public interface TbUserMapper extends BaseMapper<TbUser> {
 
     public int searchUserIdByEmail(String email);
 
-
+    public int activeUserAccount(HashMap param);
 
 
 }

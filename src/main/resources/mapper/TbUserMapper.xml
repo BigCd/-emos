@@ -191,6 +191,15 @@
         WHERE email=#{email} AND status = 1
     </select>
 
+    <update id="activeUserAccount" parameterType="HashMap">
+        UPDATE tb_user
+        SET open_id=#{openId},
+            nickname=#{nickname},
+            photo=#{photo}
+        WHERE id=#{userId} AND status = 1
+    </update>
+
+
 
 
 
