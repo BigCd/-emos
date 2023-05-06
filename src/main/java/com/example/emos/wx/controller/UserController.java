@@ -2,6 +2,7 @@ package com.example.emos.wx.controller;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.example.emos.wx.common.util.R;
 import com.example.emos.wx.config.shiro.JwtUtil;
 import com.example.emos.wx.config.tencent.TLSSigAPIv2;
@@ -87,7 +88,15 @@ public class UserController {
             token = "";
         }*/
         if (StrUtil.isNotEmpty(token)) {
-            jwtUtil.verifierToken(token);   //验证令牌的有效性
+            //jwtUtil.verifierToken(token);   //验证令牌的有效性
+            try{
+                jwtUtil.verifierToken(token);   //验证令牌的有效性
+            }catch (TokenExpiredException e){
+                //如果令牌过期就生成新的令牌
+                id = tbUserService.login(form.getCode());
+                token = jwtUtil.createToken(id);
+                saveCacheToken(token, id);
+            }
             id = jwtUtil.getUserId(token);
         } else {
             id = tbUserService.login(form.getCode());

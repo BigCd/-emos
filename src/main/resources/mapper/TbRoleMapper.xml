@@ -27,6 +27,7 @@
                 LEFT JOIN tb_role r ON JSON_CONTAINS ( r.permissions, CAST( p.id AS CHAR ) ) AND r.id=#{id}
         ORDER BY p.module_id,p.id
     </select>
+
     <select id="searchAllPermission" resultType="HashMap">
         SELECT
             p.id,

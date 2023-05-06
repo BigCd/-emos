@@ -31,14 +31,14 @@ public class TbRoleServiceImpl extends ServiceImpl<TbRoleMapper, TbRole>
     @Override
     public ArrayList<HashMap> searchRoleOwnPermission(int id) {
         ArrayList<HashMap> list =  tbRoleMapper.searchRoleOwnPermission(id);
-        list = handleDate(list);
+        list = handleData(list);
          return list;
     }
 
     @Override
     public ArrayList<HashMap> searchAllPermission() {
         ArrayList<HashMap> list = tbRoleMapper.searchAllPermission();
-        list = handleDate(list);
+        list = handleData(list);
         return list;
     }
 
@@ -82,35 +82,35 @@ public class TbRoleServiceImpl extends ServiceImpl<TbRoleMapper, TbRole>
      * @param list
      * @return
      */
-    private ArrayList<HashMap> handleDate(ArrayList<HashMap> list) {
+    private ArrayList<HashMap> handleData(ArrayList<HashMap> list) {
         ArrayList permsList = new ArrayList();
         ArrayList actionList = new ArrayList();
         HashSet set = new HashSet();
         HashMap data = new HashMap();
 
-        for(HashMap map : list){
-            long permissionId = (Long)map.get("id");
-            String moduleName = (String)map.get("actionName");
-            String actionName = (String)map.get("actionName");
+        for (HashMap map : list) {
+            long permissionId = (Long) map.get("id");
+            String moduleName = (String) map.get("moduleName");
+            String actionName = (String) map.get("actionName");
             String selected = map.get("selected").toString();
 
-            if(set.contains(moduleName)){
+            if (set.contains(moduleName)) {
                 JSONObject json = new JSONObject();
-                json.set("id",permissionId);
-                json.set("actionName",actionName);
-                json.set("selected",selected.equals("1")?true:false);
+                json.set("id", permissionId);
+                json.set("actionName", actionName);
+                json.set("selected", selected.equals("1") ? true : false);
                 actionList.add(json);
-            }else {
+            } else {
                 set.add(moduleName);
                 data = new HashMap();
-                data.put("moduleName",moduleName);
+                data.put("moduleName", moduleName);
                 actionList = new ArrayList();
                 JSONObject json = new JSONObject();
-                json.set("id",permissionId);
-                json.set("actionName",actionName);
-                json.set("selected",selected.equals(1)?true:false);
+                json.set("id", permissionId);
+                json.set("actionName", actionName);
+                json.set("selected", selected.equals("1") ? true : false);
                 actionList.add(json);
-                data.put("action",actionList);
+                data.put("action", actionList);
                 permsList.add(data);
             }
 

@@ -35,12 +35,12 @@ public class RoleController {
         return R.ok().put("result",list);
     }
 
-    @GetMapping("/seachAllPermission")
+    @GetMapping("/searchAllPermission")
     @ApiOperation("查询所有权限")
-    @RequiresPermissions(value ={"ROOT","ROLE:SELECT"},logical = Logical.OR)
-    public R searchAllPermission(){
+    @RequiresPermissions(value = {"ROOT", "ROLE:SELECT"}, logical = Logical.OR)
+    public R searchAllPermission() {
         ArrayList list = tbRoleService.searchAllPermission();
-        return R.ok().put("result",list);
+        return R.ok().put("result", list);
     }
 
 
