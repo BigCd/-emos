@@ -11,6 +11,7 @@ import com.example.emos.wx.db.pojo.TbUser;
 import com.example.emos.wx.exception.EmosException;
 import com.example.emos.wx.service.TbUserService;
 import com.example.emos.wx.db.dao.TbUserMapper;
+import com.example.emos.wx.task.ActiveCodeTask;
 import com.example.emos.wx.task.MessageTask;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,9 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
 
     @Resource
     private TbDeptMapper tbDeptMapper;
+
+    @Autowired
+    private ActiveCodeTask activeCodeTask;
 
     /**
      * 获取到微信OpenId
@@ -208,6 +212,21 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
     public String searchMemberEmail(int id) {
         String email = tbUserMapper.searchMemberEmail(id);
         return email;
+    }
+
+    @Override
+    public void insertUser(HashMap param) {
+        //保存记录
+        int row = tbUserMapper.insert(param);
+        if (row ==1){
+            String email = (String) param.get("email");
+            //根据Email 查找新添加用户的主键值
+            int userId = tbUserMapper.searchUserIdByEmail(email);
+            //生成激活码，并且用邮件发送
+            activeCodeTask.sendActiveCodeAsync(userId,email);
+        }else {
+            throw new EmosException("员工数据添加失败");
+        }
     }
 
 

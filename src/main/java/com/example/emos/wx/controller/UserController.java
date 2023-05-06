@@ -1,6 +1,7 @@
 package com.example.emos.wx.controller;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONUtil;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.example.emos.wx.common.util.R;
@@ -21,10 +22,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @RestController
@@ -162,6 +160,35 @@ public class UserController {
         TLSSigAPIv2 api = new TLSSigAPIv2(appid,key);
         String userSig = api.genUserSig(email,expire);
         return R.ok().put("userSig",userSig).put("email",email);
+    }
+
+    @PostMapping("/insertUser")
+    @ApiOperation("添加员工数据")
+    @RequiresPermissions(value = {"ROOT", "EMPLOYEE:INSERT"}, logical = Logical.OR)
+    public R inserUser(@RequestBody InsertUserForm form){
+
+            if (!JSONUtil.isJsonArray(form.getRole())) {
+                throw new EmosException("角色不是数组格式");
+            }
+            JSONArray array = JSONUtil.parseArray(form.getRole());
+            HashMap param = new HashMap();
+            param.put("name", form.getName());
+            param.put("sex", form.getSex());
+            param.put("tel", form.getTel());
+            param.put("email", form.getEmail());
+            param.put("hiredate", form.getHiredate());
+            param.put("role", form.getRole());
+            param.put("deptName", form.getDeptName());
+            param.put("status", form.getStatus());
+            param.put("createTime", new Date());
+            if (array.contains(0)) {
+                param.put("root", true);
+            } else {
+                param.put("root", false);
+            }
+
+            tbUserService.insertUser(param);
+            return R.ok().put("result", "success");
     }
 
 

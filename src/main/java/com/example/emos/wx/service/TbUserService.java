@@ -34,4 +34,6 @@ public interface TbUserService extends IService<TbUser> {
 
     public String searchMemberEmail(int id);
 
+    public void insertUser(HashMap param);
+
 }

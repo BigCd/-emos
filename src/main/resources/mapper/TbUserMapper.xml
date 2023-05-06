@@ -185,6 +185,12 @@
         SELECT COUNT(*) AS count FROM tb_user WHERE dept_id=#{deptId} AND status = 1
     </select>
 
+    <select id="searchUserIdByEmail" parameterType="String" resultType="int">
+        SELECT id
+        FROM tb_user
+        WHERE email=#{email} AND status = 1
+    </select>
+
 
 
 
