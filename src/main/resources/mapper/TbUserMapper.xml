@@ -181,6 +181,11 @@
         SELECT email FROM tb_user WHERE id=#{id} AND status = 1
     </select>
 
+    <select id="searchUserCountInDept" parameterType="int" resultType="long">
+        SELECT COUNT(*) AS count FROM tb_user WHERE dept_id=#{deptId} AND status = 1
+    </select>
+
+
 
 
 

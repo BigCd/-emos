@@ -25,6 +25,28 @@
         GROUP BY d.id
     </select>
 
+    <select id="searchAllDept" resultType="com.example.emos.wx.db.pojo.TbDept">
+        SELECT
+            id,
+            dept_name
+        FROM tb_dept
+        ORDER BY id
+    </select>
+    <insert id="insertDept" parameterType="String">
+        INSERT INTO tb_dept
+        SET dept_name=#{deptName}
+    </insert>
+    <delete id="deleteDeptById" parameterType="int">
+        DELETE FROM tb_dept
+        WHERE id = #{id}
+    </delete>
+    <update id="updateDeptById" parameterType="com.example.emos.wx.db.pojo.TbDept">
+        UPDATE tb_dept
+        SET dept_name=#{deptName}
+        WHERE id = #{id}
+    </update>
+
+
 
 
 

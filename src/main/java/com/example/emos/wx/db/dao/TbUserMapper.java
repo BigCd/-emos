@@ -43,6 +43,8 @@ public interface TbUserMapper extends BaseMapper<TbUser> {
 
     public String searchMemberEmail(int id);
 
+    public long searchUserCountInDept(int deptId);
+
 
 
 

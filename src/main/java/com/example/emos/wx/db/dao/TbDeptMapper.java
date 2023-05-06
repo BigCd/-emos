@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
 * @author Administrator
@@ -14,6 +15,14 @@ import java.util.HashMap;
 */
 public interface TbDeptMapper extends BaseMapper<TbDept> {
     public ArrayList<HashMap> searchDeptMembers(String keyword);
+
+    public List<TbDept> searchAllDept();
+
+    public int insertDept(String deptName);
+
+    public int deleteDeptById(int id);
+
+    public int updateDeptById(TbDept entity);
 
 }
 
