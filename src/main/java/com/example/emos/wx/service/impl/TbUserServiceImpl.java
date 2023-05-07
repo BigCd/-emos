@@ -251,6 +251,30 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
         }
     }
 
+    @Override
+    public HashMap searchUserInfo(int userId) {
+        HashMap map = tbUserMapper.searchUserInfo(userId);
+        return map;
+    }
+
+    @Override
+    public int updateUserInfo(HashMap param) {
+        //更新员工记录
+        int rows = tbUserMapper.updateUserInfo(param);
+        //更新成功就发送消息通知
+        if(rows == 1){
+            Integer userId  =(Integer) param.get("userId");
+            String msg = "你的个人资料已经被成功修改";
+            MessageEntity entity = new MessageEntity();
+            entity.setSenderId(0);//系统自动发出
+            entity.setSenderPhoto("../../static/system.jpg");
+            entity.setMsg(msg);
+            entity.setSendTime(new Date());
+            messageTask.sendAsync(userId.toString(),entity);
+        }
+        return rows;
+    }
+
 
 }
 

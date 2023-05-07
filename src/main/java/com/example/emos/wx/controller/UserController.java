@@ -191,6 +191,51 @@ public class UserController {
             return R.ok().put("result", "success");
     }
 
+    @PostMapping("/searchUserInfo")
+    @ApiOperation("查询员工数据")
+    @RequiresPermissions(value = {"ROOT", "EMPLOYEE:SELECT"}, logical = Logical.OR)
+    public R searchUserInfo(@Valid @RequestBody SearchUserInfoForm form) {
+        HashMap map = tbUserService.searchUserInfo(form.getUserId());
+        return R.ok().put("result", map);
+    }
+
+    @GetMapping("/searchUserSelfInfo")
+    @ApiOperation("查询用户信息")
+    public R searchUserSelfInfo(@RequestHeader("token") String token) {
+        int userId = jwtUtil.getUserId(token);
+        HashMap map = tbUserService.searchUserInfo(userId);
+        return R.ok().put("result", map);
+    }
+
+    @PostMapping("/updateUserInfo")
+    @ApiOperation("更新用户数据")
+    @RequiresPermissions(value = {"ROOT", "EMPLOYEE:UPDATE"}, logical = Logical.OR)
+    public R updateUserInfo(@Valid @RequestBody UpdateUserInfoForm form) {
+        boolean root = false;
+        if (!JSONUtil.isJsonArray(form.getRole())) {
+            throw new EmosException("role不是有效的JSON数组");
+        } else {
+            JSONArray role = JSONUtil.parseArray(form.getRole());
+            root = role.contains(0) ? true : false;
+        }
+        HashMap param = new HashMap();
+        param.put("name", form.getName());
+        param.put("sex", form.getSex());
+        param.put("deptName", form.getDeptName());
+        param.put("tel", form.getTel());
+        param.put("email", form.getEmail());
+        param.put("hiredate", form.getHiredate());
+        param.put("role", form.getRole());
+        param.put("status", form.getStatus());
+        param.put("userId", form.getUserId());
+        param.put("root", root);
+
+        int rows = tbUserService.updateUserInfo(param);
+        return R.ok().put("result", rows);
+    }
+
+
+
 
 
 

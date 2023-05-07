@@ -199,6 +199,21 @@
         WHERE id=#{userId} AND status = 1
     </update>
 
+    <update id="updateUserInfo" parameterType="HashMap">
+        UPDATE tb_user
+        SET name = #{name},
+            sex = #{sex},
+            dept_id = ( SELECT id FROM tb_dept WHERE dept_name = #{deptName} ) ,
+            tel=#{tel},
+            email=#{email},
+            hiredate=#{hiredate},
+            role=#{role},
+            status=#{status},
+            root=#{root}
+        WHERE id = #{userId} AND status = 1
+    </update>
+
+
 
 
 

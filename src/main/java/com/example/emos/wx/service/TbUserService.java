@@ -36,4 +36,8 @@ public interface TbUserService extends IService<TbUser> {
 
     public void insertUser(HashMap param);
 
+    public HashMap searchUserInfo(int userId);
+
+    public int updateUserInfo(HashMap param);
+
 }

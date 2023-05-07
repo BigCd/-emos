@@ -49,6 +49,8 @@ public interface TbUserMapper extends BaseMapper<TbUser> {
 
     public int activeUserAccount(HashMap param);
 
+    public int updateUserInfo(HashMap param);
+
 
 }
 
