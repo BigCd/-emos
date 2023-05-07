@@ -97,6 +97,13 @@
         WHERE user_id=#{userId} AND date BETWEEN #{startDate} AND #{endDate}
     </select>
 
+    <delete id="deleteUserCheckin" parameterType="int">
+        DELETE
+        FROM tb_checkin
+        WHERE user_id = #{userId}
+    </delete>
+
+
 
 
 </mapper>

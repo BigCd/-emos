@@ -234,6 +234,14 @@ public class UserController {
         return R.ok().put("result", rows);
     }
 
+    @PostMapping("/deleteUserById")
+    @ApiOperation("删除员工记录")
+    @RequiresPermissions(value = {"ROOT","EMPLOYEE:DELETE"},logical = Logical.OR)
+    public R deleteUserById(@Valid @RequestBody DeleteUserByIdForm form){
+        tbUserService.deleteUserById(form.getId());
+        return R.ok().put("result","success");
+    }
+
 
 
 

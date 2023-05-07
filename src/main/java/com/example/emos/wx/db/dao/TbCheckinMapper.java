@@ -20,6 +20,10 @@ public interface TbCheckinMapper extends BaseMapper<TbCheckin> {
     public HashMap searchTodayCheckin(int userId);
     public long searchCheckinDays(int userId);
     public ArrayList<HashMap> searchWeekCheckin(HashMap param);
+
+    public int deleteUserCheckin(int userId);
+
+
 }
 
 

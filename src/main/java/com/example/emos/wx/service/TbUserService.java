@@ -40,4 +40,6 @@ public interface TbUserService extends IService<TbUser> {
 
     public int updateUserInfo(HashMap param);
 
+    public void deleteUserById(int id);
+
 }

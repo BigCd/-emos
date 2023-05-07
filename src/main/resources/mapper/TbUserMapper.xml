@@ -213,6 +213,12 @@
         WHERE id = #{userId} AND status = 1
     </update>
 
+    <delete id="deleteUserById" parameterType="int">
+        DELETE FROM tb_user
+        WHERE id=#{id}
+    </delete>
+
+
 
 
 

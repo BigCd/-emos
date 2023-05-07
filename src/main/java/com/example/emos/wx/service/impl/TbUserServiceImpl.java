@@ -5,12 +5,11 @@ import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.emos.wx.db.dao.TbDeptMapper;
+import com.example.emos.wx.db.dao.*;
 import com.example.emos.wx.db.pojo.MessageEntity;
 import com.example.emos.wx.db.pojo.TbUser;
 import com.example.emos.wx.exception.EmosException;
 import com.example.emos.wx.service.TbUserService;
-import com.example.emos.wx.db.dao.TbUserMapper;
 import com.example.emos.wx.task.ActiveCodeTask;
 import com.example.emos.wx.task.MessageTask;
 import lombok.extern.slf4j.Slf4j;
@@ -54,6 +53,20 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Resource
+    private TbCheckinMapper tbCheckinMapper;
+
+    @Autowired
+    private MessageDao messageDao;
+
+    @Autowired
+    private MessageRefDao messageRefDao;
+
+    @Resource
+    private TbFaceModelMapper faceModelMapper;
+
+
 
     /**
      * 获取到微信OpenId
@@ -273,6 +286,19 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser>
             messageTask.sendAsync(userId.toString(),entity);
         }
         return rows;
+    }
+
+    @Override
+    public void deleteUserById(int id) {
+        int row = tbUserMapper.deleteUserById(id);//删除员工数据
+        if(row !=1){
+            throw new EmosException("删除员工失败");
+        }
+        tbCheckinMapper.deleteUserCheckin(id);
+        messageDao.deleteUserMessage(id);
+        messageRefDao.deleteUserMessageRef(id);
+        faceModelMapper.deleteFaceModel(id);
+        messageTask.deleteQueue(id+"");
     }
 
 
