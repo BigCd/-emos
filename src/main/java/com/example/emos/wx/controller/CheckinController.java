@@ -9,8 +9,8 @@ import com.example.emos.wx.config.shiro.JwtUtil;
 import com.example.emos.wx.controller.form.CheckinForm;
 import com.example.emos.wx.controller.form.SearchMonthCheckinForm;
 import com.example.emos.wx.exception.EmosException;
-import com.example.emos.wx.service.TbCheckinService;
-import com.example.emos.wx.service.TbUserService;
+import com.example.emos.wx.controller.service.TbCheckinService;
+import com.example.emos.wx.controller.service.TbUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -49,7 +48,7 @@ public class CheckinController {
     private SystemConstants constants;
 
     @GetMapping("/validCanCheckIn")
-    @ApiOperation("查看用户今天是否可以签到")
+    @ApiOperation("查看用户今天是否可以签到1")
     public R validCanCheckIn(@RequestHeader("token") String token ){
         //通过token获取到userId
         int userId = jwtUtil.getUserId(token);
